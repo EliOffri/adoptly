@@ -1,0 +1,2 @@
+-keep,allowobfuscation,allowshrinking class com.example.dogadoption.ui.donation.DonationViewModel
+-keep,allowobfuscation,allowshrinking class com.example.dogadoption.ui.donation.DonationViewModel
