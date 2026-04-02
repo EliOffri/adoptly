@@ -538,7 +538,7 @@ public final class DaggerDogAdoptionApplication_HiltComponents_SingletonC {
           return (T) new FavoritesViewModel(singletonCImpl.favoritesRepositoryProvider.get());
 
           case 4: // com.example.dogadoption.ui.home.HomeViewModel 
-          return (T) new HomeViewModel(singletonCImpl.dogsRepositoryProvider.get(), singletonCImpl.userDogsRepositoryProvider.get());
+          return (T) new HomeViewModel(singletonCImpl.dogsRepositoryProvider.get(), singletonCImpl.userDogsRepositoryProvider.get(), singletonCImpl.favoritesRepositoryProvider.get());
 
           case 5: // com.example.dogadoption.ui.reportstray.ReportStrayViewModel 
           return (T) new ReportStrayViewModel();

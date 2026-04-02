@@ -1,0 +1,188 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --or:#F97316;--or-lt:#FFF3E8;--or-dk:#C2410C;
+    --tx:#1C1917;--mt:#78716C;--bg:#F7F4F1;--cd:#FFFFFF;--bd:rgba(0,0,0,0.08);
+  }
+  body{font-family:'DM Sans',sans-serif;background:#D6D0C8}
+  .phone{width:393px;background:var(--bg);margin:0 auto;border-radius:46px;overflow:hidden;border:9px solid #111;box-shadow:0 0 0 1px #2a2a2a,0 40px 80px rgba(0,0,0,0.4)}
+
+  .sbar{height:30px;background:var(--cd);display:flex;justify-content:space-between;align-items:center;padding:0 22px}
+  .sbar-t{font-size:12px;font-weight:700;color:var(--tx);font-family:'DM Sans',sans-serif}
+  .sbar-r{display:flex;align-items:center;gap:5px}
+
+  .hdr{background:var(--cd);padding:6px 20px 14px;border-bottom:1px solid var(--bd)}
+  .hdr-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+
+  .logo{display:flex;align-items:center;gap:10px}
+  .logomark{width:42px;height:42px;background:var(--or);border-radius:16px;display:flex;align-items:center;justify-content:center}
+  .logotxt{font-family:'Nunito',sans-serif;font-size:23px;font-weight:900;color:var(--tx);letter-spacing:-0.5px}
+  .logotxt em{color:var(--or);font-style:normal}
+
+  .avatar{width:40px;height:40px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;position:relative;border:2.5px solid var(--or-lt);outline:2px solid var(--or)}
+  .avatar-txt{font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:#fff}
+  .avatar-dot{position:absolute;bottom:0;right:0;width:10px;height:10px;background:#22C55E;border-radius:50%;border:2px solid #fff}
+
+  .greet{font-size:13px;color:var(--mt);margin-bottom:3px}
+  .hed{font-family:'Nunito',sans-serif;font-size:23px;font-weight:900;color:var(--tx);line-height:1.25;letter-spacing:-0.3px}
+  .hed em{color:var(--or);font-style:normal}
+
+  .srch-wrap{background:var(--cd);padding:10px 20px 4px}
+  .srch{display:flex;align-items:center;gap:10px;background:#F0EBE4;border-radius:28px;padding:0 6px 0 16px;height:46px}
+  .srch-ico{flex-shrink:0}
+  .srch-in{border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tx);outline:none;flex:1}
+  .srch-in::placeholder{color:#B5AEA7}
+  .srch-btn{width:34px;height:34px;background:var(--or);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+  .chips{display:flex;gap:8px;padding:10px 20px 12px;overflow-x:auto;scrollbar-width:none;background:var(--cd)}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{padding:7px 16px;border-radius:20px;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;border:1.5px solid var(--bd);background:var(--cd);color:var(--mt);font-family:'DM Sans',sans-serif}
+  .chip.on{background:var(--or);color:#fff;border-color:var(--or)}
+
+  .sec{display:flex;justify-content:space-between;align-items:center;padding:0 20px;margin-bottom:12px}
+  .sec-t{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--tx)}
+  .sec-a{font-size:13px;color:var(--or);font-weight:600;cursor:pointer}
+
+  .feat{padding:0 20px;margin-bottom:22px}
+  .fcard{border-radius:22px;overflow:hidden;position:relative;height:188px;background:#FDDCB0}
+  .fdog{position:absolute;right:-8px;bottom:-8px;font-size:110px;line-height:1}
+  .fover{position:absolute;inset:0;padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between}
+  .fbadge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.92);color:var(--or-dk);font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;width:fit-content;text-transform:uppercase;letter-spacing:0.4px;font-family:'DM Sans',sans-serif}
+  .fname{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:var(--tx)}
+  .fmeta{font-size:12px;color:#5C5046;margin-top:2px;font-weight:500}
+  .hbtn{position:absolute;top:14px;right:14px;width:36px;height:36px;background:rgba(255,255,255,0.85);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 20px}
+  .bcard{background:var(--cd);border-radius:18px;overflow:hidden;border:1px solid var(--bd);cursor:pointer}
+  .bimg{height:112px;background:#F0EBE3;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative}
+  .bcnt{position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.92);font-size:10px;color:var(--mt);padding:2px 7px;border-radius:8px;font-weight:600;font-family:'DM Sans',sans-serif}
+  .binf{padding:10px 12px 12px}
+  .bnm{font-weight:600;font-size:14px;color:var(--tx)}
+  .bsb{font-size:11px;color:var(--mt);margin-top:2px}
+
+  .bnav{background:var(--cd);border-top:1px solid var(--bd);display:flex;justify-content:space-around;align-items:center;padding:10px 0 22px}
+  .ni{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;padding:6px 20px;border-radius:16px;position:relative}
+  .ni.on{background:var(--or-lt)}
+  .ni-lbl{font-size:10px;font-weight:600;color:var(--mt);font-family:'DM Sans',sans-serif}
+  .ni.on .ni-lbl{color:var(--or)}
+  .ndot{position:absolute;top:5px;right:16px;width:7px;height:7px;background:var(--or);border-radius:50%;border:1.5px solid var(--cd)}
+
+  .scrl{overflow-y:auto;max-height:572px;padding-bottom:4px}
+</style>
+
+<div style="padding:20px 0">
+<div class="phone">
+
+  <div class="sbar">
+    <span class="sbar-t">9:41</span>
+    <div class="sbar-r">
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="#1C1917"><rect x="0" y="5" width="3" height="7" rx="1"/><rect x="4.5" y="3" width="3" height="9" rx="1"/><rect x="9" y="1" width="3" height="11" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1"/></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="#1C1917"><path d="M8 3C10.5 3 12.7 4.1 14.2 5.8L15.5 4.3C13.6 2.2 11 1 8 1S2.4 2.2 0.5 4.3L1.8 5.8C3.3 4.1 5.5 3 8 3Z"/><path d="M8 6C9.7 6 11.2 6.8 12.2 8L13.5 6.5C12.1 5 10.2 4 8 4S3.9 5 2.5 6.5L3.8 8C4.8 6.8 6.3 6 8 6Z"/><circle cx="8" cy="10" r="1.8"/></svg>
+      <svg width="26" height="12" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="3.5" stroke="#1C1917" stroke-opacity="0.4"/><rect x="2" y="2" width="17" height="8" rx="2" fill="#1C1917"/><path d="M24 4V8C24.9 7.5 25.5 6.8 25.5 6S24.9 4.5 24 4Z" fill="#1C1917" fill-opacity="0.5"/></svg>
+    </div>
+  </div>
+
+  <div class="hdr">
+    <div class="hdr-row">
+      <div class="logo">
+        <div class="logomark">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+            <ellipse cx="7.5" cy="6" rx="3" ry="3.8" fill="white"/>
+            <ellipse cx="18.5" cy="6" rx="3" ry="3.8" fill="white"/>
+            <ellipse cx="3.5" cy="13" rx="2.4" ry="3.2" fill="white"/>
+            <ellipse cx="22.5" cy="13" rx="2.4" ry="3.2" fill="white"/>
+            <path d="M13 11C8.2 11 5 14.2 5 18C5 21.3 8.2 24 13 24C17.8 24 21 21.3 21 18C21 14.2 17.8 11 13 11Z" fill="white"/>
+            <path d="M10.5 18.5C10.5 17.4 11.6 16.5 13 16.5C14.4 16.5 15.5 17.4 15.5 18.5V20.5H10.5V18.5Z" fill="#F97316"/>
+            <circle cx="11" cy="15.5" r="1" fill="#F97316"/>
+            <circle cx="15" cy="15.5" r="1" fill="#F97316"/>
+          </svg>
+        </div>
+        <span class="logotxt"><em>A</em>doptly</span>
+      </div>
+      <div class="avatar">
+        <span class="avatar-txt">A</span>
+        <div class="avatar-dot"></div>
+      </div>
+    </div>
+    <p class="greet">Good morning, Alex 👋</p>
+    <h1 class="hed">Find your new<br><em>best friend</em></h1>
+  </div>
+
+  <div class="srch-wrap">
+    <div class="srch">
+      <svg class="srch-ico" width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="7.5" cy="7.5" r="5.5" stroke="#B5AEA7" stroke-width="1.8"/><path d="M12 12L16 16" stroke="#B5AEA7" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input class="srch-in" type="text" placeholder="Search breed, size, age...">
+      <button class="srch-btn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M4 8h8M6 12h4" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="chips">
+    <span class="chip on">All</span>
+    <span class="chip">Small</span>
+    <span class="chip">Medium</span>
+    <span class="chip">Large</span>
+    <span class="chip">Puppy</span>
+    <span class="chip">Senior</span>
+  </div>
+
+  <div class="scrl">
+    <div style="padding:18px 0 0">
+      <div class="sec"><span class="sec-t">Featured today</span><span class="sec-a">See all</span></div>
+      <div class="feat">
+        <div class="fcard">
+          <div class="fdog">🦮</div>
+          <button class="hbtn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 15.5C9 15.5 1.5 11 1.5 6.5C1.5 4.3 3.3 2.5 5.5 2.5C7 2.5 8.3 3.3 9 4.5C9.7 3.3 11 2.5 12.5 2.5C14.7 2.5 16.5 4.3 16.5 6.5C16.5 11 9 15.5 9 15.5Z" stroke="#78716C" stroke-width="1.6"/></svg>
+          </button>
+          <div class="fover">
+            <div class="fbadge">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="#C2410C"><path d="M5.5 1L6.8 4.1H10L7.4 6.2L8.3 9.5L5.5 7.6L2.7 9.5L3.6 6.2L1 4.1H4.2L5.5 1Z"/></svg>
+              Staff pick
+            </div>
+            <div>
+              <div class="fname">Bruno, 2 yrs</div>
+              <div class="fmeta">Golden Retriever · 3.2 km away</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec"><span class="sec-t">Browse by breed</span><span class="sec-a">See all</span></div>
+      <div class="grid">
+        <div class="bcard"><div class="bimg">🐕<span class="bcnt">4 dogs</span></div><div class="binf"><div class="bnm">Affenpinscher</div><div class="bsb">No sub-breeds</div></div></div>
+        <div class="bcard"><div class="bimg">🐩<span class="bcnt">7 dogs</span></div><div class="binf"><div class="bnm">African</div><div class="bsb">1 sub-breed</div></div></div>
+        <div class="bcard"><div class="bimg">🐕‍🦺<span class="bcnt">2 dogs</span></div><div class="binf"><div class="bnm">Airedale</div><div class="bsb">No sub-breeds</div></div></div>
+        <div class="bcard"><div class="bimg">🦴<span class="bcnt">5 dogs</span></div><div class="binf"><div class="bnm">Akita</div><div class="bsb">No sub-breeds</div></div></div>
+        <div class="bcard"><div class="bimg">🐶<span class="bcnt">3 dogs</span></div><div class="binf"><div class="bnm">Appenzeller</div><div class="bsb">No sub-breeds</div></div></div>
+        <div class="bcard"><div class="bimg">🐾<span class="bcnt">6 dogs</span></div><div class="binf"><div class="bnm">Australian</div><div class="bsb">2 sub-breeds</div></div></div>
+      </div>
+      <div style="height:16px"></div>
+    </div>
+  </div>
+
+  <div class="bnav">
+    <div class="ni on">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 9.5L11 3L19 9.5V19C19 19.6 18.6 20 18 20H14V15H8V20H4C3.4 20 3 19.6 3 19V9.5Z" fill="#F97316"/></svg>
+      <span class="ni-lbl" style="color:var(--or)">Home</span>
+    </div>
+    <div class="ni" style="position:relative">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 19C11 19 2 13.5 2 7.5C2 5 4 3 6.5 3C8.2 3 9.7 4 10.5 5.3C11.3 4 12.8 3 14.5 3C17 3 19 5 19 7.5C19 13.5 11 19 11 19Z" stroke="#78716C" stroke-width="1.8"/></svg>
+      <span class="ni-lbl">Saved</span>
+      <div class="ndot"></div>
+    </div>
+    <div class="ni">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 4H18C18.6 4 19 4.4 19 5V14C19 14.6 18.6 15 18 15H7L3 19V5C3 4.4 3.4 4 4 4Z" stroke="#78716C" stroke-width="1.8"/><circle cx="8" cy="9.5" r="1" fill="#78716C"/><circle cx="11" cy="9.5" r="1" fill="#78716C"/><circle cx="14" cy="9.5" r="1" fill="#78716C"/></svg>
+      <span class="ni-lbl">Messages</span>
+    </div>
+    <div class="ni">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="3.5" stroke="#78716C" stroke-width="1.8"/><path d="M4 19C4 15.7 7.1 13 11 13C14.9 13 18 15.7 18 19" stroke="#78716C" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span class="ni-lbl">Profile</span>
+    </div>
+  </div>
+
+</div>
+</div>

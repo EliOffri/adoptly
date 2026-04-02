@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#FF6D3B</color>
-    <color name="primary_dark">#C43E00</color>
-    <color name="primary_container">#FFD7C4</color>
+    <color name="primary">#F97316</color>
+    <color name="primary_dark">#C2410C</color>
+    <color name="primary_container">#FFF3E8</color>
     <color name="on_primary">#FFFFFF</color>
-    <color name="secondary">#795548</color>
-    <color name="background">#FFFBF8</color>
+    <color name="secondary">#78716C</color>
+    <color name="background">#F7F4F1</color>
     <color name="surface">#FFFFFF</color>
-    <color name="user_added_badge">#4CAF50</color>
+    <color name="text_primary">#1C1917</color>
+    <color name="text_muted">#78716C</color>
+    <color name="border">#14000000</color>
+    <color name="search_bar_bg">#F0EBE4</color>
+    <color name="featured_card_bg">#FDDCB0</color>
+    <color name="featured_meta_text">#5C5046</color>
+    <color name="featured_badge_bg">#EBFFFFFF</color>
+    <color name="featured_heart_bg">#D9FFFFFF</color>
+    <color name="user_added_badge">#22C55E</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

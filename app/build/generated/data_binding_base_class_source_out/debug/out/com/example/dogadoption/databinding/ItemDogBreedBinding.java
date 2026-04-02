@@ -27,17 +27,21 @@ public final class ItemDogBreedBinding implements ViewBinding {
   public final TextView textBreedName;
 
   @NonNull
+  public final TextView textCountBadge;
+
+  @NonNull
   public final TextView textSubBreedCount;
 
   @NonNull
   public final TextView textUserAddedBadge;
 
   private ItemDogBreedBinding(@NonNull MaterialCardView rootView, @NonNull ImageView imageBreed,
-      @NonNull TextView textBreedName, @NonNull TextView textSubBreedCount,
-      @NonNull TextView textUserAddedBadge) {
+      @NonNull TextView textBreedName, @NonNull TextView textCountBadge,
+      @NonNull TextView textSubBreedCount, @NonNull TextView textUserAddedBadge) {
     this.rootView = rootView;
     this.imageBreed = imageBreed;
     this.textBreedName = textBreedName;
+    this.textCountBadge = textCountBadge;
     this.textSubBreedCount = textSubBreedCount;
     this.textUserAddedBadge = textUserAddedBadge;
   }
@@ -81,6 +85,12 @@ public final class ItemDogBreedBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.text_count_badge;
+      TextView textCountBadge = ViewBindings.findChildViewById(rootView, id);
+      if (textCountBadge == null) {
+        break missingId;
+      }
+
       id = R.id.text_sub_breed_count;
       TextView textSubBreedCount = ViewBindings.findChildViewById(rootView, id);
       if (textSubBreedCount == null) {
@@ -94,7 +104,7 @@ public final class ItemDogBreedBinding implements ViewBinding {
       }
 
       return new ItemDogBreedBinding((MaterialCardView) rootView, imageBreed, textBreedName,
-          textSubBreedCount, textUserAddedBadge);
+          textCountBadge, textSubBreedCount, textUserAddedBadge);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

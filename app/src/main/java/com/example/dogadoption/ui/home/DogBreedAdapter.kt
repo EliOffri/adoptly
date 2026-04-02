@@ -28,6 +28,13 @@ class DogBreedAdapter(
             } else {
                 binding.root.context.getString(R.string.sub_breeds_count, dogBreed.subBreeds.size)
             }
+            if (dogBreed.subBreeds.isNotEmpty()) {
+                binding.textCountBadge.text =
+                    binding.root.context.getString(R.string.sub_breeds_count, dogBreed.subBreeds.size)
+                binding.textCountBadge.visibility = View.VISIBLE
+            } else {
+                binding.textCountBadge.visibility = View.GONE
+            }
             binding.textUserAddedBadge.visibility =
                 if (dogBreed.isLocallyAdded) View.VISIBLE else View.GONE
             Glide.with(binding.root.context)

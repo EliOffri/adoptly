@@ -16,14 +16,19 @@ class DogsRepository @Inject constructor(
         return try {
             val breedsResponse = apiService.getAllBreeds()
             val breedNames = breedsResponse.message.keys.toList()
-            val count = breedNames.size.coerceAtMost(50)
-            val randomImagesResponse = apiService.getRandomImages(count)
-            val images = randomImagesResponse.message
-            val dogBreeds = breedNames.take(images.size).mapIndexed { index, name ->
+            val firstBatch = apiService.getRandomImages(50).message
+            val remaining = (breedNames.size - 50).coerceAtLeast(0)
+            val secondBatch = if (remaining > 0) {
+                apiService.getRandomImages(remaining.coerceAtMost(50)).message
+            } else {
+                emptyList()
+            }
+            val images = firstBatch + secondBatch
+            val dogBreeds = breedNames.mapIndexed { index, name ->
                 DogBreed(
                     name = name,
                     subBreeds = breedsResponse.message[name] ?: emptyList(),
-                    imageUrl = images[index]
+                    imageUrl = images.getOrElse(index) { "" }
                 )
             }
             Resource.Success(dogBreeds)

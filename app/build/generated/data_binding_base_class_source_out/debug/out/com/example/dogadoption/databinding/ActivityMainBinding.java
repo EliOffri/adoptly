@@ -4,6 +4,7 @@ package com.example.dogadoption.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -29,23 +30,27 @@ public final class ActivityMainBinding implements ViewBinding {
   public final BottomNavigationView bottomNav;
 
   @NonNull
-  public final ImageView headerLogo;
+  public final TextView headerAppName;
 
   @NonNull
-  public final TextView headerTitle;
+  public final FrameLayout headerAvatar;
+
+  @NonNull
+  public final ImageView headerLogo;
 
   @NonNull
   public final FragmentContainerView navHostFragment;
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView,
       @NonNull ConstraintLayout appHeader, @NonNull BottomNavigationView bottomNav,
-      @NonNull ImageView headerLogo, @NonNull TextView headerTitle,
-      @NonNull FragmentContainerView navHostFragment) {
+      @NonNull TextView headerAppName, @NonNull FrameLayout headerAvatar,
+      @NonNull ImageView headerLogo, @NonNull FragmentContainerView navHostFragment) {
     this.rootView = rootView;
     this.appHeader = appHeader;
     this.bottomNav = bottomNav;
+    this.headerAppName = headerAppName;
+    this.headerAvatar = headerAvatar;
     this.headerLogo = headerLogo;
-    this.headerTitle = headerTitle;
     this.navHostFragment = navHostFragment;
   }
 
@@ -88,15 +93,21 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.header_logo;
-      ImageView headerLogo = ViewBindings.findChildViewById(rootView, id);
-      if (headerLogo == null) {
+      id = R.id.header_app_name;
+      TextView headerAppName = ViewBindings.findChildViewById(rootView, id);
+      if (headerAppName == null) {
         break missingId;
       }
 
-      id = R.id.header_title;
-      TextView headerTitle = ViewBindings.findChildViewById(rootView, id);
-      if (headerTitle == null) {
+      id = R.id.header_avatar;
+      FrameLayout headerAvatar = ViewBindings.findChildViewById(rootView, id);
+      if (headerAvatar == null) {
+        break missingId;
+      }
+
+      id = R.id.header_logo;
+      ImageView headerLogo = ViewBindings.findChildViewById(rootView, id);
+      if (headerLogo == null) {
         break missingId;
       }
 
@@ -106,8 +117,8 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, appHeader, bottomNav, headerLogo,
-          headerTitle, navHostFragment);
+      return new ActivityMainBinding((ConstraintLayout) rootView, appHeader, bottomNav,
+          headerAppName, headerAvatar, headerLogo, navHostFragment);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

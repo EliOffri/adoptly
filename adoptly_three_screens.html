@@ -1,0 +1,354 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=DM+Sans:wght@400;500;600&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --or:#F97316;--or-lt:#FFF3E8;--or-dk:#C2410C;
+    --tx:#1C1917;--mt:#78716C;--bg:#F7F4F1;--cd:#FFFFFF;--bd:rgba(0,0,0,0.08);
+  }
+  body{font-family:'DM Sans',sans-serif;background:#D6D0C8}
+  .wrap{display:flex;gap:20px;padding:20px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
+  .phone{width:320px;background:var(--bg);border-radius:44px;overflow:hidden;border:8px solid #111;box-shadow:0 0 0 1px #2a2a2a,0 30px 60px rgba(0,0,0,0.35)}
+  .sbar{height:28px;background:var(--cd);display:flex;justify-content:space-between;align-items:center;padding:0 20px}
+  .sbar-t{font-size:11px;font-weight:700;color:var(--tx);font-family:'DM Sans',sans-serif}
+  .sbar-r{display:flex;align-items:center;gap:4px}
+
+  .hdr{background:var(--cd);padding:6px 18px 12px;border-bottom:1px solid var(--bd)}
+  .hdr-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0}
+  .logo{display:flex;align-items:center;gap:8px}
+  .logomark{width:36px;height:36px;background:var(--or);border-radius:13px;display:flex;align-items:center;justify-content:center}
+  .logotxt{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--tx);letter-spacing:-0.5px}
+  .logotxt em{color:var(--or);font-style:normal}
+  .avatar{width:36px;height:36px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;position:relative;border:2px solid var(--or-lt);outline:2px solid var(--or)}
+  .avatar-txt{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:#fff}
+  .avatar-dot{position:absolute;bottom:0;right:0;width:9px;height:9px;background:#22C55E;border-radius:50%;border:2px solid #fff}
+
+  .pg-title{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:var(--tx);padding:16px 18px 4px}
+  .pg-sub{font-size:12px;color:var(--mt);padding:0 18px 14px}
+
+  .bnav{background:var(--cd);border-top:1px solid var(--bd);display:flex;justify-content:space-around;align-items:center;padding:8px 0 18px}
+  .ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:5px 16px;border-radius:14px}
+  .ni.on{background:var(--or-lt)}
+  .ni-lbl{font-size:10px;font-weight:600;color:var(--mt);font-family:'DM Sans',sans-serif}
+  .ni.on .ni-lbl{color:var(--or)}
+  .ndot{position:absolute;top:4px;right:13px;width:6px;height:6px;background:var(--or);border-radius:50%;border:1.5px solid var(--cd)}
+
+  .saved-list{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+  .dog-card{background:var(--cd);border-radius:18px;border:1px solid var(--bd);display:flex;align-items:center;gap:12px;padding:10px 12px;position:relative}
+  .dog-img{width:62px;height:62px;border-radius:13px;background:#E8E0D4;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:32px}
+  .dog-info{flex:1;min-width:0}
+  .dog-name{font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--tx)}
+  .dog-breed{font-size:11px;color:var(--mt);margin-top:1px}
+  .dog-note{font-size:11px;color:#B5AEA7;margin-top:4px;font-style:italic}
+  .dog-actions{display:flex;flex-direction:column;gap:6px}
+  .act-btn{width:32px;height:32px;border-radius:10px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;background:#F5F0EB}
+  .dog-tag{display:inline-block;background:var(--or-lt);color:var(--or-dk);font-size:10px;font-weight:600;padding:2px 8px;border-radius:8px;margin-top:4px;font-family:'DM Sans',sans-serif}
+
+  .empty-state{padding:32px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+  .empty-icon{width:56px;height:56px;background:var(--or-lt);border-radius:20px;display:flex;align-items:center;justify-content:center}
+  .empty-txt{font-size:13px;color:var(--mt)}
+
+  .form-body{padding:6px 18px 14px;display:flex;flex-direction:column;gap:12px}
+  .field-lbl{font-size:11px;font-weight:600;color:var(--mt);margin-bottom:4px;letter-spacing:0.3px;text-transform:uppercase;font-family:'DM Sans',sans-serif}
+  .field-input{width:100%;height:46px;background:var(--cd);border:1.5px solid var(--bd);border-radius:14px;padding:0 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tx);outline:none}
+  .field-input::placeholder{color:#C0B8B0}
+  .field-input:focus{border-color:var(--or)}
+  .field-select{width:100%;height:46px;background:var(--cd);border:1.5px solid var(--bd);border-radius:14px;padding:0 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--mt);outline:none;appearance:none;cursor:pointer}
+  .select-wrap{position:relative}
+  .select-wrap::after{content:'';position:absolute;right:14px;top:50%;transform:translateY(-50%);width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid var(--mt);pointer-events:none}
+  .field-textarea{width:100%;background:var(--cd);border:1.5px solid var(--bd);border-radius:14px;padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--tx);outline:none;resize:none;height:80px}
+  .field-textarea::placeholder{color:#C0B8B0}
+  .or-btn{width:100%;height:48px;background:var(--or);border:none;border-radius:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:#fff;cursor:pointer;letter-spacing:0.2px}
+  .or-btn-ghost{width:100%;height:48px;background:var(--or-lt);border:1.5px solid var(--or);border-radius:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;color:var(--or-dk);cursor:pointer}
+
+  .donate-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .amt-chip{height:44px;background:var(--cd);border:1.5px solid var(--bd);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:var(--mt);cursor:pointer}
+  .amt-chip.on{background:var(--or-lt);border-color:var(--or);color:var(--or-dk)}
+
+  .report-photo{margin:0 18px;height:140px;background:#EDE8E1;border-radius:18px;border:2px dashed #D0C8BE;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer}
+  .photo-icon{width:44px;height:44px;background:var(--cd);border-radius:14px;display:flex;align-items:center;justify-content:center}
+  .photo-txt{font-size:12px;color:var(--mt);font-weight:500}
+  .report-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .loc-btn{height:44px;background:#F0EBE3;border:none;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:6px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--mt);cursor:pointer}
+  .status-row{display:flex;align-items:center;gap:8px;padding:0 2px}
+  .status-dot{width:7px;height:7px;border-radius:50%;background:#D0C8BE;flex-shrink:0}
+  .status-dot.set{background:#22C55E}
+  .status-txt{font-size:11px;color:var(--mt)}
+  .urgency-badge{display:inline-flex;align-items:center;gap:5px;background:#FEF2F2;color:#991B1B;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;font-family:'DM Sans',sans-serif}
+</style>
+
+<div class="wrap">
+
+  <div class="phone">
+    <div class="sbar">
+      <span class="sbar-t">9:41</span>
+      <div class="sbar-r">
+        <svg width="14" height="11" viewBox="0 0 14 11" fill="#1C1917"><rect x="0" y="4" width="2.5" height="7" rx="1"/><rect x="3.8" y="2.5" width="2.5" height="8.5" rx="1"/><rect x="7.6" y="1" width="2.5" height="10" rx="1"/><rect x="11.4" y="0" width="2.5" height="11" rx="1"/></svg>
+        <svg width="14" height="11" viewBox="0 0 14 11" fill="#1C1917"><path d="M7 2.8C9 2.8 10.8 3.7 12 5.2L13.2 3.8C11.6 2 9.4 1 7 1S2.4 2 0.8 3.8L2 5.2C3.2 3.7 5 2.8 7 2.8Z"/><path d="M7 5.5C8.4 5.5 9.6 6.1 10.5 7.1L11.7 5.7C10.4 4.4 8.8 3.6 7 3.6S3.6 4.4 2.3 5.7L3.5 7.1C4.4 6.1 5.6 5.5 7 5.5Z"/><circle cx="7" cy="9.3" r="1.6"/></svg>
+        <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3" stroke="#1C1917" stroke-opacity="0.4"/><rect x="2" y="2" width="14" height="7" rx="1.5" fill="#1C1917"/><path d="M21 4V7C21.7 6.6 22.2 6 22.2 5.5S21.7 4.4 21 4Z" fill="#1C1917" fill-opacity="0.5"/></svg>
+      </div>
+    </div>
+    <div class="hdr">
+      <div class="hdr-row">
+        <div class="logo">
+          <div class="logomark">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <ellipse cx="6.5" cy="5" rx="2.5" ry="3.2" fill="white"/>
+              <ellipse cx="15.5" cy="5" rx="2.5" ry="3.2" fill="white"/>
+              <ellipse cx="3" cy="11" rx="2" ry="2.7" fill="white"/>
+              <ellipse cx="19" cy="11" rx="2" ry="2.7" fill="white"/>
+              <path d="M11 9C7.2 9 4.5 11.7 4.5 15C4.5 18 7.2 20.5 11 20.5C14.8 20.5 17.5 18 17.5 15C17.5 11.7 14.8 9 11 9Z" fill="white"/>
+              <path d="M9 15C9 14 9.9 13.3 11 13.3C12.1 13.3 13 14 13 15V17H9V15Z" fill="#F97316"/>
+              <circle cx="9.3" cy="12.5" r="0.9" fill="#F97316"/>
+              <circle cx="12.7" cy="12.5" r="0.9" fill="#F97316"/>
+            </svg>
+          </div>
+          <span class="logotxt"><em>A</em>doptly</span>
+        </div>
+        <div class="avatar"><span class="avatar-txt">A</span><div class="avatar-dot"></div></div>
+      </div>
+    </div>
+
+    <div class="pg-title">Saved dogs</div>
+    <div class="pg-sub">2 dogs on your watchlist</div>
+
+    <div class="saved-list">
+      <div class="dog-card">
+        <div class="dog-img">🐕</div>
+        <div class="dog-info">
+          <div class="dog-name">Beagle</div>
+          <div class="dog-breed">Medium · 2 yrs · 4.1 km away</div>
+          <div class="dog-tag">Available now</div>
+        </div>
+        <div class="dog-actions">
+          <button class="act-btn">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 2.5h11M2 7.5h7M2 12.5h9" stroke="#78716C" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="10.5" r="2.5" stroke="#F97316" stroke-width="1.3"/><path d="M14 12.5L15.5 14" stroke="#F97316" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </button>
+          <button class="act-btn">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 2.5L12.5 12.5M12.5 2.5L2.5 12.5" stroke="#E24B4A" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="dog-card">
+        <div class="dog-img">🐩</div>
+        <div class="dog-info">
+          <div class="dog-name">Coonhound</div>
+          <div class="dog-breed">Large · 4 yrs · 7.8 km away</div>
+          <div class="dog-tag" style="background:#F0FDF4;color:#166534">New arrival</div>
+        </div>
+        <div class="dog-actions">
+          <button class="act-btn">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 2.5h11M2 7.5h7M2 12.5h9" stroke="#78716C" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="10.5" r="2.5" stroke="#F97316" stroke-width="1.3"/><path d="M14 12.5L15.5 14" stroke="#F97316" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </button>
+          <button class="act-btn">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 2.5L12.5 12.5M12.5 2.5L2.5 12.5" stroke="#E24B4A" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div style="background:var(--cd);border-radius:18px;border:1.5px dashed var(--bd);display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;cursor:pointer">
+        <div style="width:36px;height:36px;background:var(--or-lt);border-radius:10px;display:flex;align-items:center;justify-content:center">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3V13M3 8H13" stroke="#F97316" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <span style="font-size:13px;font-weight:600;color:var(--mt)">Browse more dogs</span>
+      </div>
+    </div>
+
+    <div class="bnav">
+      <div class="ni">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2.5 8.5L10 2.5L17.5 8.5V17.5C17.5 17.8 17.3 18 17 18H13V13.5H7V18H3C2.7 18 2.5 17.8 2.5 17.5V8.5Z" stroke="#78716C" stroke-width="1.6"/></svg>
+        <span class="ni-lbl">Home</span>
+      </div>
+      <div class="ni on">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17C10 17 2 12 2 7C2 4.8 3.8 3 6 3C7.6 3 9 3.9 9.8 5.2C10.6 3.9 12 3 13.5 3C15.7 3 17.5 4.8 17.5 7C17.5 12 10 17 10 17Z" fill="#F97316"/></svg>
+        <span class="ni-lbl" style="color:var(--or)">Saved</span>
+      </div>
+      <div class="ni" style="position:relative">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.5 3.5H16.5C16.8 3.5 17 3.7 17 4V13C17 13.3 16.8 13.5 16.5 13.5H6.5L2.5 17.5V4C2.5 3.7 2.7 3.5 3.5 3.5Z" stroke="#78716C" stroke-width="1.6"/><circle cx="7" cy="8.5" r="0.9" fill="#78716C"/><circle cx="10" cy="8.5" r="0.9" fill="#78716C"/><circle cx="13" cy="8.5" r="0.9" fill="#78716C"/></svg>
+        <span class="ni-lbl">Messages</span>
+      </div>
+      <div class="ni">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="#78716C" stroke-width="1.6"/><path d="M3.5 17.5C3.5 14.5 6.5 12 10 12C13.5 12 16.5 14.5 16.5 17.5" stroke="#78716C" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span class="ni-lbl">Profile</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="phone">
+    <div class="sbar">
+      <span class="sbar-t">9:41</span>
+      <div class="sbar-r">
+        <svg width="14" height="11" viewBox="0 0 14 11" fill="#1C1917"><rect x="0" y="4" width="2.5" height="7" rx="1"/><rect x="3.8" y="2.5" width="2.5" height="8.5" rx="1"/><rect x="7.6" y="1" width="2.5" height="10" rx="1"/><rect x="11.4" y="0" width="2.5" height="11" rx="1"/></svg>
+        <svg width="14" height="11" viewBox="0 0 14 11" fill="#1C1917"><path d="M7 2.8C9 2.8 10.8 3.7 12 5.2L13.2 3.8C11.6 2 9.4 1 7 1S2.4 2 0.8 3.8L2 5.2C3.2 3.7 5 2.8 7 2.8Z"/><path d="M7 5.5C8.4 5.5 9.6 6.1 10.5 7.1L11.7 5.7C10.4 4.4 8.8 3.6 7 3.6S3.6 4.4 2.3 5.7L3.5 7.1C4.4 6.1 5.6 5.5 7 5.5Z"/><circle cx="7" cy="9.3" r="1.6"/></svg>
+        <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3" stroke="#1C1917" stroke-opacity="0.4"/><rect x="2" y="2" width="14" height="7" rx="1.5" fill="#1C1917"/><path d="M21 4V7C21.7 6.6 22.2 6 22.2 5.5S21.7 4.4 21 4Z" fill="#1C1917" fill-opacity="0.5"/></svg>
+      </div>
+    </div>
+    <div class="hdr">
+      <div class="hdr-row">
+        <div class="logo">
+          <div class="logomark">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <ellipse cx="6.5" cy="5" rx="2.5" ry="3.2" fill="white"/>
+              <ellipse cx="15.5" cy="5" rx="2.5" ry="3.2" fill="white"/>
+              <ellipse cx="3" cy="11" rx="2" ry="2.7" fill="white"/>
+              <ellipse cx="19" cy="11" rx="2" ry="2.7" fill="white"/>
+              <path d="M11 9C7.2 9 4.5 11.7 4.5 15C4.5 18 7.2 20.5 11 20.5C14.8 20.5 17.5 18 17.5 15C17.5 11.7 14.8 9 11 9Z" fill="white"/>
+              <path d="M9 15C9 14 9.9 13.3 11 13.3C12.1 13.3 13 14 13 15V17H9V15Z" fill="#F97316"/>
+              <circle cx="9.3" cy="12.5" r="0.9" fill="#F97316"/>
+              <circle cx="12.7" cy="12.5" r="0.9" fill="#F97316"/>
+            </svg>
+          </div>
+          <span class="logotxt"><em>A</em>doptly</span>
+        </div>
+        <div class="avatar"><span class="avatar-txt">A</span><div class="avatar-dot"></div></div>
+      </div>
+    </div>
+
+    <div class="pg-title">Make a donation</div>
+    <div class="pg-sub">Support shelters near you</div>
+
+    <div class="form-body">
+      <div>
+        <div class="field-lbl">Your name</div>
+        <input class="field-input" type="text" placeholder="Alex Johnson">
+      </div>
+      <div>
+        <div class="field-lbl">Donation type</div>
+        <div class="select-wrap">
+          <select class="field-select"><option>Food & supplies</option><option>Medical care</option><option>Shelter fund</option></select>
+        </div>
+      </div>
+      <div>
+        <div class="field-lbl">Quick amount</div>
+        <div class="donate-options">
+          <div class="amt-chip">₪25</div>
+          <div class="amt-chip on">₪50</div>
+          <div class="amt-chip">₪100</div>
+        </div>
+      </div>
+      <div>
+        <div class="field-lbl">Or enter quantity</div>
+        <input class="field-input" type="text" placeholder="Custom amount...">
+      </div>
+      <div>
+        <div class="field-lbl">Note (optional)</div>
+        <textarea class="field-textarea" placeholder="Leave a message for the shelter..."></textarea>
+      </div>
+      <button class="or-btn">Submit donation</button>
+    </div>
+
+    <div class="bnav">
+      <div class="ni">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2.5 8.5L10 2.5L17.5 8.5V17.5C17.5 17.8 17.3 18 17 18H13V13.5H7V18H3C2.7 18 2.5 17.8 2.5 17.5V8.5Z" stroke="#78716C" stroke-width="1.6"/></svg>
+        <span class="ni-lbl">Home</span>
+      </div>
+      <div class="ni">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17C10 17 2 12 2 7C2 4.8 3.8 3 6 3C7.6 3 9 3.9 9.8 5.2C10.6 3.9 12 3 13.5 3C15.7 3 17.5 4.8 17.5 7C17.5 12 10 17 10 17Z" stroke="#78716C" stroke-width="1.6"/></svg>
+        <span class="ni-lbl">Saved</span>
+      </div>
+      <div class="ni on">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" fill="#F97316"/><path d="M7 10H13M10 7V13" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="ni-lbl" style="color:var(--or)">Donate</span>
+      </div>
+      <div class="ni">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="#78716C" stroke-width="1.6"/><path d="M3.5 17.5C3.5 14.5 6.5 12 10 12C13.5 12 16.5 14.5 16.5 17.5" stroke="#78716C" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span class="ni-lbl">Profile</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="phone">
+    <div class="sbar">
+      <span class="sbar-t">9:41</span>
+      <div class="sbar-r">
+        <svg width="14" height="11" viewBox="0 0 14 11" fill="#1C1917"><rect x="0" y="4" width="2.5" height="7" rx="1"/><rect x="3.8" y="2.5" width="2.5" height="8.5" rx="1"/><rect x="7.6" y="1" width="2.5" height="10" rx="1"/><rect x="11.4" y="0" width="2.5" height="11" rx="1"/></svg>
+        <svg width="14" height="11" viewBox="0 0 14 11" fill="#1C1917"><path d="M7 2.8C9 2.8 10.8 3.7 12 5.2L13.2 3.8C11.6 2 9.4 1 7 1S2.4 2 0.8 3.8L2 5.2C3.2 3.7 5 2.8 7 2.8Z"/><path d="M7 5.5C8.4 5.5 9.6 6.1 10.5 7.1L11.7 5.7C10.4 4.4 8.8 3.6 7 3.6S3.6 4.4 2.3 5.7L3.5 7.1C4.4 6.1 5.6 5.5 7 5.5Z"/><circle cx="7" cy="9.3" r="1.6"/></svg>
+        <svg width="23" height="11" viewBox="0 0 23 11" fill="none"><rect x="0.5" y="0.5" width="19" height="10" rx="3" stroke="#1C1917" stroke-opacity="0.4"/><rect x="2" y="2" width="14" height="7" rx="1.5" fill="#1C1917"/><path d="M21 4V7C21.7 6.6 22.2 6 22.2 5.5S21.7 4.4 21 4Z" fill="#1C1917" fill-opacity="0.5"/></svg>
+      </div>
+    </div>
+    <div class="hdr">
+      <div class="hdr-row">
+        <div class="logo">
+          <div class="logomark">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <ellipse cx="6.5" cy="5" rx="2.5" ry="3.2" fill="white"/>
+              <ellipse cx="15.5" cy="5" rx="2.5" ry="3.2" fill="white"/>
+              <ellipse cx="3" cy="11" rx="2" ry="2.7" fill="white"/>
+              <ellipse cx="19" cy="11" rx="2" ry="2.7" fill="white"/>
+              <path d="M11 9C7.2 9 4.5 11.7 4.5 15C4.5 18 7.2 20.5 11 20.5C14.8 20.5 17.5 18 17.5 15C17.5 11.7 14.8 9 11 9Z" fill="white"/>
+              <path d="M9 15C9 14 9.9 13.3 11 13.3C12.1 13.3 13 14 13 15V17H9V15Z" fill="#F97316"/>
+              <circle cx="9.3" cy="12.5" r="0.9" fill="#F97316"/>
+              <circle cx="12.7" cy="12.5" r="0.9" fill="#F97316"/>
+            </svg>
+          </div>
+          <span class="logotxt"><em>A</em>doptly</span>
+        </div>
+        <div class="avatar"><span class="avatar-txt">A</span><div class="avatar-dot"></div></div>
+      </div>
+    </div>
+
+    <div class="pg-title">Report a stray</div>
+    <div class="pg-sub">Help us find them a home</div>
+
+    <div class="form-body">
+      <div>
+        <div class="urgency-badge">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="6" stroke="#991B1B" stroke-width="1.2"/><path d="M6.5 3.5V7" stroke="#991B1B" stroke-width="1.3" stroke-linecap="round"/><circle cx="6.5" cy="9.5" r="0.7" fill="#991B1B"/></svg>
+          This helps shelters respond faster
+        </div>
+      </div>
+
+      <div class="report-photo">
+        <div class="photo-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="5" width="18" height="14" rx="3" stroke="#78716C" stroke-width="1.6"/><circle cx="11" cy="12" r="3.5" stroke="#78716C" stroke-width="1.6"/><path d="M8 5L9.5 2.5H12.5L14 5" stroke="#78716C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="photo-txt">Tap to take or upload a photo</span>
+      </div>
+
+      <div class="report-btns">
+        <button class="loc-btn">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 1C5 1 3 3 3 5.5C3 9 7.5 14 7.5 14C7.5 14 12 9 12 5.5C12 3 10 1 7.5 1Z" stroke="#78716C" stroke-width="1.4"/><circle cx="7.5" cy="5.5" r="1.8" stroke="#78716C" stroke-width="1.4"/></svg>
+          Get location
+        </button>
+        <button class="loc-btn" style="background:var(--or-lt);color:var(--or-dk)">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 1C5 1 3 3 3 5.5C3 9 7.5 14 7.5 14C7.5 14 12 9 12 5.5C12 3 10 1 7.5 1Z" stroke="#C2410C" stroke-width="1.4"/><circle cx="7.5" cy="5.5" r="1.8" fill="#F97316"/></svg>
+          Location set
+        </button>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div class="status-row"><div class="status-dot"></div><span class="status-txt">No photo taken yet</span></div>
+        <div class="status-row"><div class="status-dot set"></div><span class="status-txt" style="color:#166534">Location captured</span></div>
+      </div>
+
+      <div>
+        <div class="field-lbl">Describe the animal</div>
+        <textarea class="field-textarea" placeholder="Color, size, condition, behavior..."></textarea>
+      </div>
+
+      <button class="or-btn">Submit report</button>
+      <button class="or-btn-ghost">Save as draft</button>
+    </div>
+
+    <div class="bnav">
+      <div class="ni">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2.5 8.5L10 2.5L17.5 8.5V17.5C17.5 17.8 17.3 18 17 18H13V13.5H7V18H3C2.7 18 2.5 17.8 2.5 17.5V8.5Z" stroke="#78716C" stroke-width="1.6"/></svg>
+        <span class="ni-lbl">Home</span>
+      </div>
+      <div class="ni">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17C10 17 2 12 2 7C2 4.8 3.8 3 6 3C7.6 3 9 3.9 9.8 5.2C10.6 3.9 12 3 13.5 3C15.7 3 17.5 4.8 17.5 7C17.5 12 10 17 10 17Z" stroke="#78716C" stroke-width="1.6"/></svg>
+        <span class="ni-lbl">Saved</span>
+      </div>
+      <div class="ni">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="#78716C" stroke-width="1.6"/><path d="M7 10H13M10 7V13" stroke="#78716C" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span class="ni-lbl">Donate</span>
+      </div>
+      <div class="ni on">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" fill="#F97316"/><circle cx="10" cy="7.5" r="1.2" fill="white"/><path d="M10 10.5V14" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="ni-lbl" style="color:var(--or)">Report stray</span>
+      </div>
+    </div>
+  </div>
+
+</div>

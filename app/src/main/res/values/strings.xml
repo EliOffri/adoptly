@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Dog Adoption</string>
+    <string name="app_name">Adoptly</string>
 
     <string name="title_home">Home</string>
     <string name="title_breed_detail">Breed Details</string>
-    <string name="title_favorites">Favorites</string>
+    <string name="title_favorites">Saved</string>
     <string name="title_adoption">Adopt a Dog</string>
     <string name="title_donation">Donate</string>
     <string name="title_report_stray">Report Stray</string>
+
+    <string name="greeting_text">Good morning 👋</string>
+    <string name="headline_line1">Find your new</string>
+    <string name="headline_line2">best friend</string>
+    <string name="search_hint">Search breed</string>
+    <string name="label_filter">Filter</string>
+    <string name="chip_all">All</string>
+    <string name="chip_small">Small</string>
+    <string name="chip_medium">Medium</string>
+    <string name="chip_large">Large</string>
+    <string name="chip_puppy">Puppy</string>
+    <string name="chip_senior">Senior</string>
+    <string name="label_featured_today">Featured today</string>
+    <string name="label_browse_breed">Browse by breed</string>
+    <string name="label_see_all">See all</string>
+    <string name="featured_badge_label">Staff pick</string>
+    <string name="avatar_initial">A</string>
 
     <string name="no_sub_breeds">No sub-breeds</string>
     <string name="sub_breeds_count">%d sub-breed(s)</string>

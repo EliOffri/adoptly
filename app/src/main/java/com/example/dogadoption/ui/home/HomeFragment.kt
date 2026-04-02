@@ -1,6 +1,8 @@
 package com.example.dogadoption.ui.home
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.example.dogadoption.R
 import com.example.dogadoption.data.remote.model.DogBreed
-import com.example.dogadoption.databinding.DialogAddDogBinding
 import com.example.dogadoption.databinding.FragmentHomeBinding
 import com.example.dogadoption.util.Resource
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -26,6 +28,10 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var adapter: DogBreedAdapter
 
+    private var fullList: List<DogBreed> = emptyList()
+    private var currentQuery = ""
+    private var currentFeaturedBreed: DogBreed? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,8 +44,17 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupSearch()
         observeViewModel()
-        binding.fabAddDog.setOnClickListener { showAddDogDialog() }
+        binding.fabAddDog.setOnClickListener { showAddDogBottomSheet() }
+        binding.btnFeaturedFavorite.setOnClickListener {
+            currentFeaturedBreed?.let { viewModel.toggleFavorite(it) }
+        }
+        viewModel.isFeaturedFavorite.observe(viewLifecycleOwner) { isFav ->
+            binding.btnFeaturedFavorite.setImageResource(
+                if (isFav) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+            )
+        }
     }
 
     private fun setupRecyclerView() {
@@ -49,6 +64,31 @@ class HomeFragment : Fragment() {
         )
         binding.recyclerViewBreeds.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerViewBreeds.adapter = adapter
+    }
+
+    private fun setupSearch() {
+        binding.editSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                currentQuery = s?.toString()?.trim() ?: ""
+                applyFilters()
+            }
+        })
+    }
+
+    private fun applyFilters() {
+        val filtered = fullList.filter { matchesQuery(it, currentQuery) }
+        adapter.submitList(filtered)
+        if (filtered.isNotEmpty()) {
+            updateFeaturedCard(filtered.first())
+        }
+    }
+
+    private fun matchesQuery(breed: DogBreed, query: String): Boolean {
+        if (query.isEmpty()) return true
+        return breed.name.contains(query, ignoreCase = true) ||
+            breed.subBreeds.any { it.contains(query, ignoreCase = true) }
     }
 
     private fun observeViewModel() {
@@ -61,7 +101,8 @@ class HomeFragment : Fragment() {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.recyclerViewBreeds.visibility = View.VISIBLE
-                    adapter.submitList(resource.data)
+                    fullList = resource.data ?: emptyList()
+                    applyFilters()
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -74,21 +115,27 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showAddDogDialog() {
-        val dialogBinding = DialogAddDogBinding.inflate(layoutInflater)
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.add_dog_dialog_title))
-            .setView(dialogBinding.root)
-            .setPositiveButton(getString(R.string.add)) { _, _ ->
-                val name = dialogBinding.editTextDogName.text?.toString()?.trim() ?: ""
-                val imageUrl = dialogBinding.editTextDogImageUrl.text?.toString()?.trim() ?: ""
-                val description = dialogBinding.editTextDogDescription.text?.toString()?.trim() ?: ""
-                if (name.isNotBlank()) {
-                    viewModel.addUserDog(name, imageUrl, description)
-                }
-            }
-            .setNegativeButton(getString(R.string.cancel), null)
-            .show()
+    private fun updateFeaturedCard(breed: DogBreed) {
+        currentFeaturedBreed = breed
+        viewModel.setFeaturedBreed(breed.name)
+        binding.textFeaturedName.text = breed.name.replaceFirstChar { it.uppercase() }
+        binding.textFeaturedMeta.text = if (breed.subBreeds.isEmpty()) {
+            getString(R.string.no_sub_breeds)
+        } else {
+            getString(R.string.sub_breeds_count, breed.subBreeds.size)
+        }
+        Glide.with(this)
+            .load(breed.imageUrl.ifBlank { null })
+            .placeholder(R.drawable.ic_placeholder_dog)
+            .error(R.drawable.ic_placeholder_dog)
+            .centerCrop()
+            .into(binding.imageFeatured)
+    }
+
+    private fun showAddDogBottomSheet() {
+        AddDogBottomSheet { name, imageUrl, description ->
+            viewModel.addUserDog(name, imageUrl, description)
+        }.show(childFragmentManager, AddDogBottomSheet.TAG)
     }
 
     private fun showDeleteDogDialog(breed: DogBreed) {

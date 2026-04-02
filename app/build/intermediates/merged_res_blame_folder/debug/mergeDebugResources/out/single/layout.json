@@ -12,10 +12,6 @@
         "source": "/Users/elioffri/.gradle/daemon/8.13/com.example.dogadoption.app-main-58:/layout/item_favorite_dog.xml"
     },
     {
-        "merged": "com.example.dogadoption.app-mergeDebugResources-55:/layout/item_dog_breed.xml",
-        "source": "com.example.dogadoption.app-main-58:/layout/item_dog_breed.xml"
-    },
-    {
         "merged": "/Users/elioffri/.gradle/daemon/8.13/com.example.dogadoption.app-mergeDebugResources-55:/layout/fragment_report_stray.xml",
         "source": "/Users/elioffri/.gradle/daemon/8.13/com.example.dogadoption.app-main-58:/layout/fragment_report_stray.xml"
     },
@@ -38,6 +34,10 @@
     {
         "merged": "/Users/elioffri/.gradle/daemon/8.13/com.example.dogadoption.app-mergeDebugResources-55:/layout/fragment_adoption.xml",
         "source": "/Users/elioffri/.gradle/daemon/8.13/com.example.dogadoption.app-main-58:/layout/fragment_adoption.xml"
+    },
+    {
+        "merged": "com.example.dogadoption.app-mergeDebugResources-55:/layout/activity_main.xml",
+        "source": "com.example.dogadoption.app-main-58:/layout/activity_main.xml"
     },
     {
         "merged": "/Users/elioffri/.gradle/daemon/8.13/com.example.dogadoption.app-mergeDebugResources-55:/layout/fragment_home.xml",

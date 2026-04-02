@@ -1,4 +1,4 @@
-#Sat Mar 28 23:31:54 IDT 2026
+#Thu Apr 02 13:37:15 IDT 2026
 base.0=/Users/elioffri/AndroidStudioProjects/DogAdoption/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/Users/elioffri/AndroidStudioProjects/DogAdoption/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
 base.10=/Users/elioffri/AndroidStudioProjects/DogAdoption/app/build/intermediates/dex/debug/mergeProjectDexDebug/9/classes.dex

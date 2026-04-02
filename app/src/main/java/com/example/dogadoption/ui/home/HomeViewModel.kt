@@ -7,9 +7,11 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.example.dogadoption.data.local.entity.FavoriteDogEntity
 import com.example.dogadoption.data.local.entity.UserDogEntity
 import com.example.dogadoption.data.remote.model.DogBreed
 import com.example.dogadoption.data.repository.DogsRepository
+import com.example.dogadoption.data.repository.FavoritesRepository
 import com.example.dogadoption.data.repository.UserDogsRepository
 import com.example.dogadoption.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val dogsRepository: DogsRepository,
-    private val userDogsRepository: UserDogsRepository
+    private val userDogsRepository: UserDogsRepository,
+    private val favoritesRepository: FavoritesRepository
 ) : ViewModel() {
 
     private val _apiBreeds = MutableLiveData<Resource<List<DogBreed>>>(Resource.Loading())
@@ -37,6 +40,28 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
+
+    private val _featuredBreedName = MutableLiveData<String>()
+    val isFeaturedFavorite: LiveData<Boolean> = _featuredBreedName.switchMap { name ->
+        favoritesRepository.isFavorite(name).asLiveData()
+    }
+
+    fun setFeaturedBreed(breedName: String) {
+        _featuredBreedName.value = breedName
+    }
+
+    fun toggleFavorite(breed: DogBreed) {
+        viewModelScope.launch {
+            val existing = favoritesRepository.getFavoriteByBreed(breed.name)
+            if (existing != null) {
+                favoritesRepository.removeFavorite(existing)
+            } else {
+                favoritesRepository.addFavorite(
+                    FavoriteDogEntity(breedName = breed.name, imageUrl = breed.imageUrl)
+                )
+            }
+        }
+    }
 
     init {
         loadBreeds()
