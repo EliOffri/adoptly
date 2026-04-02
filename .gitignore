@@ -1,3 +1,16 @@
 .env
 CLAUDE.md
 local.properties
+
+# Project-wide ignore rules
+.gradle/
+build/
+
+# Module-specific ignore rules
+**/build/
+
+# Local configuration
+.incremental/
+
+# OS-specific
+.DS_Store
