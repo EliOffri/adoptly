@@ -45,6 +45,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupSearch()
+        setupFilterChips()
         observeViewModel()
         binding.fabAddDog.setOnClickListener { showAddDogBottomSheet() }
         binding.btnFeaturedFavorite.setOnClickListener {
@@ -54,6 +55,27 @@ class HomeFragment : Fragment() {
             binding.btnFeaturedFavorite.setImageResource(
                 if (isFav) R.drawable.ic_favorite else R.drawable.ic_favorite_border
             )
+        }
+    }
+
+    private fun setupFilterChips() {
+        val chips = listOf(
+            binding.chipFilterAll,
+            binding.chipFilterSmall,
+            binding.chipFilterMedium,
+            binding.chipFilterLarge,
+            binding.chipFilterPuppy,
+            binding.chipFilterSenior
+        )
+        chips.forEach { chip ->
+            chip.setOnClickListener {
+                chips.forEach { c ->
+                    c.setBackgroundResource(R.drawable.bg_chip_default)
+                    c.setTextColor(requireContext().getColor(R.color.text_muted))
+                }
+                chip.setBackgroundResource(R.drawable.bg_chip_selected)
+                chip.setTextColor(requireContext().getColor(R.color.on_primary))
+            }
         }
     }
 

@@ -45,8 +45,8 @@ class BreedDetailFragment : Fragment() {
 
         viewModel.loadBreedDetails(breedName, imageUrl)
 
+        binding.btnBack.setOnClickListener { findNavController().navigateUp() }
         binding.fabFavorite.setOnClickListener { viewModel.toggleFavorite() }
-
         binding.buttonAdopt.setOnClickListener {
             val bundle = Bundle().apply { putString("breedName", breedName) }
             findNavController().navigate(R.id.action_breedDetailFragment_to_adoptionFragment, bundle)
@@ -61,8 +61,10 @@ class BreedDetailFragment : Fragment() {
     }
 
     private fun setupBreedInfo(breedName: String, imageUrl: String) {
-        binding.textBreedTitle.text = breedName.replaceFirstChar { it.uppercase() }
+        val displayName = breedName.replaceFirstChar { it.uppercase() }
+        binding.textBreedTitle.text = displayName
         binding.textSubBreeds.text = getString(R.string.no_sub_breeds)
+        binding.textStatSubbreedsValue.text = getString(R.string.label_stat_none)
         Glide.with(this)
             .load(imageUrl.ifBlank { null })
             .placeholder(R.drawable.ic_placeholder_dog)
@@ -79,7 +81,13 @@ class BreedDetailFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    imageAdapter.submitList(resource.data)
+                    val images = resource.data ?: emptyList()
+                    imageAdapter.submitList(images)
+                    binding.textStatSubbreedsValue.text = if (images.isNotEmpty()) {
+                        images.size.toString()
+                    } else {
+                        getString(R.string.label_stat_none)
+                    }
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE

@@ -31,6 +31,11 @@ class ReportStrayViewModel @Inject constructor() : ViewModel() {
         _location.value = Pair(latitude, longitude)
     }
 
+    fun clearState() {
+        _photoUri.value = null
+        _location.value = null
+    }
+
     fun submitReport(description: String) {
         if (description.isBlank()) {
             _submissionState.value = Resource.Error("description")

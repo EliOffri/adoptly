@@ -2,6 +2,7 @@ package com.example.dogadoption.ui.reportstray
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -10,9 +11,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.dogadoption.R
 import com.example.dogadoption.databinding.FragmentReportStrayBinding
@@ -22,13 +25,12 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ReportStrayFragment : Fragment() {
@@ -63,9 +65,7 @@ class ReportStrayFragment : Fragment() {
         ActivityResultContracts.TakePicture()
     ) { success ->
         if (success) {
-            pendingPhotoUri?.let { uri ->
-                viewModel.setPhotoUri(uri)
-            }
+            pendingPhotoUri?.let { uri -> viewModel.setPhotoUri(uri) }
         }
     }
 
@@ -84,30 +84,43 @@ class ReportStrayFragment : Fragment() {
 
         binding.buttonTakePhoto.setOnClickListener { onTakePhotoClicked() }
         binding.buttonGetLocation.setOnClickListener { onGetLocationClicked() }
+        binding.buttonLocationSet.setOnClickListener { onGetLocationClicked() }
         binding.buttonSubmitReport.setOnClickListener {
             val description = binding.editTextDescription.text?.toString()?.trim() ?: ""
             viewModel.submitReport(description)
+        }
+        binding.buttonSaveDraft.setOnClickListener {
+            Snackbar.make(binding.root, getString(R.string.report_success), Snackbar.LENGTH_SHORT).show()
         }
     }
 
     private fun observeViewModel() {
         viewModel.photoUri.observe(viewLifecycleOwner) { uri ->
             if (uri != null) {
+                binding.photoZonePlaceholder.visibility = View.INVISIBLE
+                binding.imagePhotoPreview.visibility = View.VISIBLE
                 Glide.with(this)
                     .load(uri)
                     .centerCrop()
                     .into(binding.imagePhotoPreview)
+                setDotActive(binding.viewStatusDotPhoto)
                 binding.textPhotoStatus.text = getString(R.string.photo_attached)
             } else {
+                binding.photoZonePlaceholder.visibility = View.VISIBLE
+                binding.imagePhotoPreview.visibility = View.INVISIBLE
+                setDotInactive(binding.viewStatusDotPhoto)
                 binding.textPhotoStatus.text = getString(R.string.photo_not_attached)
             }
         }
 
         viewModel.location.observe(viewLifecycleOwner) { location ->
             if (location != null) {
-                binding.textLocationStatus.text =
-                    getString(R.string.location_format, location.first, location.second)
+                binding.buttonLocationSet.setBackgroundResource(R.drawable.bg_location_button_active)
+                setDotActive(binding.viewStatusDotLocation)
+                binding.textLocationStatus.text = getString(R.string.location_format, location.first, location.second)
             } else {
+                binding.buttonLocationSet.setBackgroundResource(R.drawable.bg_location_button)
+                setDotInactive(binding.viewStatusDotLocation)
                 binding.textLocationStatus.text = getString(R.string.location_not_attached)
             }
         }
@@ -137,6 +150,22 @@ class ReportStrayFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setDotActive(dot: View) {
+        val drawable = GradientDrawable().apply {
+            shape = GradientDrawable.OVAL
+            setColor(ContextCompat.getColor(requireContext(), R.color.user_added_badge))
+        }
+        dot.background = drawable
+    }
+
+    private fun setDotInactive(dot: View) {
+        val drawable = GradientDrawable().apply {
+            shape = GradientDrawable.OVAL
+            setColor(ContextCompat.getColor(requireContext(), R.color.border))
+        }
+        dot.background = drawable
     }
 
     private fun onTakePhotoClicked() {
@@ -217,7 +246,7 @@ class ReportStrayFragment : Fragment() {
 
     private fun resetForm() {
         binding.editTextDescription.text?.clear()
-        binding.imagePhotoPreview.setImageResource(R.drawable.ic_placeholder_dog)
+        viewModel.clearState()
     }
 
     override fun onDestroyView() {

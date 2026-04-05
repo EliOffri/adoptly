@@ -1,6 +1,7 @@
 package com.example.dogadoption
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -30,5 +31,12 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         binding.bottomNav.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val hideChrome = destination.id == R.id.breedDetailFragment ||
+                destination.id == R.id.adoptionFragment
+            binding.appHeader.visibility = if (hideChrome) View.GONE else View.VISIBLE
+            binding.bottomNav.visibility = if (hideChrome) View.GONE else View.VISIBLE
+        }
     }
 }

@@ -1,10 +1,8 @@
-.env
-CLAUDE.md
-local.properties
-
 # Project-wide ignore rules
 .gradle/
 build/
+.env
+local.properties
 
 # Module-specific ignore rules
 **/build/
@@ -14,3 +12,9 @@ build/
 
 # OS-specific
 .DS_Store
+
+# Claude Code memory (internal tooling, not source code)
+memory/
+
+# Design reference (React prototype, not part of Android project)
+adoptly-react/

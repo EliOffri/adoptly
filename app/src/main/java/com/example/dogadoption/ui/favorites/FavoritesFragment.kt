@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogadoption.R
 import com.example.dogadoption.data.local.entity.FavoriteDogEntity
@@ -37,6 +38,12 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeViewModel()
+        binding.buttonBrowseDogs.setOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
+        }
+        binding.btnBrowseMore.setOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -51,12 +58,11 @@ class FavoritesFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.favorites.observe(viewLifecycleOwner) { favorites ->
             adapter.submitList(favorites)
-            if (favorites.isEmpty()) {
-                binding.textEmptyFavorites.visibility = View.VISIBLE
-                binding.recyclerViewFavorites.visibility = View.GONE
-            } else {
-                binding.textEmptyFavorites.visibility = View.GONE
-                binding.recyclerViewFavorites.visibility = View.VISIBLE
+            val isEmpty = favorites.isEmpty()
+            binding.textEmptyFavorites.visibility = if (isEmpty) View.VISIBLE else View.GONE
+            binding.nestedScrollFavorites.visibility = if (isEmpty) View.GONE else View.VISIBLE
+            if (!isEmpty) {
+                binding.textSavedCount.text = getString(R.string.watchlist_count, favorites.size)
             }
         }
     }

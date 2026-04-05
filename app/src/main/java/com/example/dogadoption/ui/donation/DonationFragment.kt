@@ -1,6 +1,8 @@
 package com.example.dogadoption.ui.donation
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +35,7 @@ class DonationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupDropdown()
+        setupAmountChips()
         observeViewModel()
 
         binding.buttonSubmitDonation.setOnClickListener {
@@ -48,6 +51,58 @@ class DonationFragment : Fragment() {
         val donationTypes = resources.getStringArray(R.array.donation_types)
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, donationTypes)
         binding.autoCompleteDonationType.setAdapter(adapter)
+    }
+
+    private fun setupAmountChips() {
+        selectChip(binding.chipAmount50)
+        binding.editTextQuantity.setText(getString(R.string.amount_50_value))
+
+        binding.chipAmount25.setOnClickListener {
+            selectChip(binding.chipAmount25)
+            binding.editTextQuantity.setText(getString(R.string.amount_25_value))
+        }
+        binding.chipAmount50.setOnClickListener {
+            selectChip(binding.chipAmount50)
+            binding.editTextQuantity.setText(getString(R.string.amount_50_value))
+        }
+        binding.chipAmount100.setOnClickListener {
+            selectChip(binding.chipAmount100)
+            binding.editTextQuantity.setText(getString(R.string.amount_100_value))
+        }
+
+        binding.editTextQuantity.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                val text = s?.toString() ?: ""
+                val matchesChip = text == getString(R.string.amount_25_value) ||
+                    text == getString(R.string.amount_50_value) ||
+                    text == getString(R.string.amount_100_value)
+                if (!matchesChip) {
+                    clearChipSelection()
+                }
+            }
+        })
+    }
+
+    private fun selectChip(selected: android.widget.TextView) {
+        val chips = listOf(binding.chipAmount25, binding.chipAmount50, binding.chipAmount100)
+        chips.forEach { chip ->
+            if (chip == selected) {
+                chip.setBackgroundResource(R.drawable.bg_amount_chip_selected)
+                chip.setTextColor(requireContext().getColor(R.color.primary))
+            } else {
+                chip.setBackgroundResource(R.drawable.bg_amount_chip_default)
+                chip.setTextColor(requireContext().getColor(R.color.text_muted))
+            }
+        }
+    }
+
+    private fun clearChipSelection() {
+        listOf(binding.chipAmount25, binding.chipAmount50, binding.chipAmount100).forEach { chip ->
+            chip.setBackgroundResource(R.drawable.bg_amount_chip_default)
+            chip.setTextColor(requireContext().getColor(R.color.text_muted))
+        }
     }
 
     private fun clearErrors() {
@@ -87,6 +142,9 @@ class DonationFragment : Fragment() {
         binding.editTextDonorName.text?.clear()
         binding.autoCompleteDonationType.text?.clear()
         binding.editTextQuantity.text?.clear()
+        binding.editTextNote.text?.clear()
+        selectChip(binding.chipAmount50)
+        binding.editTextQuantity.setText(getString(R.string.amount_50_value))
         clearErrors()
     }
 
