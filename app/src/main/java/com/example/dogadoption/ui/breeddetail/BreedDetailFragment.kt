@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -39,6 +41,12 @@ class BreedDetailFragment : Fragment() {
         val breedName = arguments?.getString("breedName") ?: ""
         val imageUrl = arguments?.getString("imageUrl") ?: ""
 
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
+            v.setPadding(0, statusBarHeight, 0, 0)
+            insets
+        }
+
         setupRecyclerView()
         setupBreedInfo(breedName, imageUrl)
         observeViewModel()
@@ -47,6 +55,9 @@ class BreedDetailFragment : Fragment() {
 
         binding.btnBack.setOnClickListener { findNavController().navigateUp() }
         binding.fabFavorite.setOnClickListener { viewModel.toggleFavorite() }
+        binding.btnCloseFullscreen.setOnClickListener { dismissFullscreen() }
+        binding.fullscreenOverlay.setOnClickListener { dismissFullscreen() }
+        binding.imageFullscreen.setOnClickListener { }
         binding.buttonAdopt.setOnClickListener {
             val bundle = Bundle().apply { putString("breedName", breedName) }
             findNavController().navigate(R.id.action_breedDetailFragment_to_adoptionFragment, bundle)
@@ -54,10 +65,23 @@ class BreedDetailFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        imageAdapter = BreedImageAdapter()
+        imageAdapter = BreedImageAdapter { imageUrl -> showFullscreenImage(imageUrl) }
         binding.recyclerViewImages.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewImages.adapter = imageAdapter
+    }
+
+    private fun showFullscreenImage(imageUrl: String) {
+        Glide.with(this)
+            .load(imageUrl)
+            .placeholder(R.drawable.ic_placeholder_dog)
+            .error(R.drawable.ic_placeholder_dog)
+            .into(binding.imageFullscreen)
+        binding.fullscreenOverlay.visibility = View.VISIBLE
+    }
+
+    private fun dismissFullscreen() {
+        binding.fullscreenOverlay.visibility = View.GONE
     }
 
     private fun setupBreedInfo(breedName: String, imageUrl: String) {

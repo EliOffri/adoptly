@@ -29,8 +29,7 @@
                 android:text="@string/breed_label"
                 android:textColor="@color/text_muted"
                 android:textSize="11sp"
-                android:letterSpacing="0.08"
-                android:textAllCaps="true" />
+                android:letterSpacing="0.08" />
 
             <TextView
                 android:id="@+id/text_breed_name"
@@ -68,6 +67,7 @@
                     android:id="@+id/edit_text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
                     android:inputType="textPersonName"
                     android:imeOptions="actionNext" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +80,6 @@
                 android:text="@string/email_hint"
                 android:textColor="@color/text_muted"
                 android:textSize="11sp"
-                android:textAllCaps="true"
                 android:letterSpacing="0.08" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -100,6 +99,7 @@
                     android:id="@+id/edit_text_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
                     android:inputType="textEmailAddress"
                     android:imeOptions="actionNext" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -112,7 +112,6 @@
                 android:text="@string/phone_hint"
                 android:textColor="@color/text_muted"
                 android:textSize="11sp"
-                android:textAllCaps="true"
                 android:letterSpacing="0.08" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -132,6 +131,7 @@
                     android:id="@+id/edit_text_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
                     android:inputType="phone"
                     android:imeOptions="actionDone" />
             </com.google.android.material.textfield.TextInputLayout>

@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
     private var fullList: List<DogBreed> = emptyList()
     private var currentQuery = ""
     private var currentFeaturedBreed: DogBreed? = null
+    private var pinnedFeaturedBreed: DogBreed? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,9 +46,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupSearch()
-        setupFilterChips()
         observeViewModel()
         binding.fabAddDog.setOnClickListener { showAddDogBottomSheet() }
+        binding.cardFeatured.setOnClickListener {
+            currentFeaturedBreed?.let { navigateToDetail(it) }
+        }
         binding.btnFeaturedFavorite.setOnClickListener {
             currentFeaturedBreed?.let { viewModel.toggleFavorite(it) }
         }
@@ -55,27 +58,6 @@ class HomeFragment : Fragment() {
             binding.btnFeaturedFavorite.setImageResource(
                 if (isFav) R.drawable.ic_favorite else R.drawable.ic_favorite_border
             )
-        }
-    }
-
-    private fun setupFilterChips() {
-        val chips = listOf(
-            binding.chipFilterAll,
-            binding.chipFilterSmall,
-            binding.chipFilterMedium,
-            binding.chipFilterLarge,
-            binding.chipFilterPuppy,
-            binding.chipFilterSenior
-        )
-        chips.forEach { chip ->
-            chip.setOnClickListener {
-                chips.forEach { c ->
-                    c.setBackgroundResource(R.drawable.bg_chip_default)
-                    c.setTextColor(requireContext().getColor(R.color.text_muted))
-                }
-                chip.setBackgroundResource(R.drawable.bg_chip_selected)
-                chip.setTextColor(requireContext().getColor(R.color.on_primary))
-            }
         }
     }
 
@@ -102,8 +84,9 @@ class HomeFragment : Fragment() {
     private fun applyFilters() {
         val filtered = fullList.filter { matchesQuery(it, currentQuery) }
         adapter.submitList(filtered)
-        if (filtered.isNotEmpty()) {
-            updateFeaturedCard(filtered.first())
+        if (pinnedFeaturedBreed == null && filtered.isNotEmpty()) {
+            pinnedFeaturedBreed = filtered.random()
+            updateFeaturedCard(pinnedFeaturedBreed!!)
         }
     }
 

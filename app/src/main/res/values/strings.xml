@@ -17,7 +17,7 @@
     <string name="greeting_text">Good morning 👋</string>
     <string name="headline_line1">Find your new</string>
     <string name="headline_line2">best friend</string>
-    <string name="search_hint">Search dogs, breeds…</string>
+    <string name="search_hint">Search dog breeds</string>
     <string name="label_filter">Filter</string>
     <string name="chip_all">All</string>
     <string name="chip_small">Small</string>
@@ -86,11 +86,11 @@
 
     <string name="label_make_donation">Make a donation</string>
     <string name="label_support_shelters">Support shelters near you</string>
-    <string name="label_your_name">YOUR NAME</string>
-    <string name="label_donation_type_upper">DONATION TYPE</string>
-    <string name="label_quick_amount">QUICK AMOUNT</string>
-    <string name="label_custom_amount">OR ENTER CUSTOM AMOUNT</string>
-    <string name="label_note_optional">NOTE (OPTIONAL)</string>
+    <string name="label_your_name">Your name</string>
+    <string name="label_donation_type_upper">Donation type</string>
+    <string name="label_quick_amount">Quick amount</string>
+    <string name="label_custom_amount">Or enter custom amount</string>
+    <string name="label_note_optional">Note (optional)</string>
     <string name="note_placeholder">Add a message…</string>
     <string name="amount_25">₪25</string>
     <string name="amount_50">₪50</string>
@@ -115,13 +115,14 @@
     <string name="label_photo_indicator">Photo</string>
     <string name="label_location_indicator">Location</string>
     <string name="label_save_draft">Save as draft</string>
-    <string name="label_describe_animal">DESCRIBE THE ANIMAL</string>
+    <string name="label_describe_animal">Describe the animal</string>
     <string name="description_placeholder">Color, size, condition, behavior…</string>
     <string name="take_photo">Take Photo</string>
     <string name="get_location">Get Location</string>
     <string name="description_hint">Describe the animal and location</string>
     <string name="submit_report">Submit report</string>
     <string name="report_success">Report submitted successfully!</string>
+    <string name="draft_saved">Draft saved</string>
     <string name="photo_attached">Photo added</string>
     <string name="photo_not_attached">not set</string>
     <string name="location_format">%.4f, %.4f</string>

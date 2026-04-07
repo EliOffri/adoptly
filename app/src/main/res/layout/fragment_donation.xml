@@ -65,6 +65,7 @@
                     android:id="@+id/edit_text_donor_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
                     android:inputType="textPersonName"
                     android:imeOptions="actionNext" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -96,6 +97,7 @@
                     android:id="@+id/auto_complete_donation_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
                     android:inputType="none"
                     android:focusable="false" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -191,6 +193,7 @@
                     android:id="@+id/edit_text_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
                     android:inputType="number"
                     android:imeOptions="actionNext" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -222,6 +225,7 @@
                     android:id="@+id/edit_text_note"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
                     android:inputType="textMultiLine"
                     android:minLines="3"
                     android:gravity="top"
@@ -234,7 +238,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
-                android:visibility="gone" />
+                android:visibility="invisible" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_submit_donation"

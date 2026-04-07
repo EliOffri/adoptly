@@ -10,6 +10,9 @@
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/text_primary</item>
         <item name="chipStyle">@style/AppChipStyle</item>
+        <item name="snackbarStyle">@style/Widget.Adoptly.Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/Widget.Adoptly.Snackbar.TextView</item>
+        <item name="snackbarButtonStyle">@style/Widget.Adoptly.Snackbar.Button</item>
     </style>
 
     <style name="AppChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
@@ -49,12 +52,50 @@
         <item name="cornerSizeBottomRight">0dp</item>
     </style>
 
+    <style name="Adoptly.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/Adoptly.AlertDialog.Shape</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Adoptly.Dialog.Button.Primary</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Adoptly.Dialog.Button.Text</item>
+    </style>
+
+    <style name="Adoptly.AlertDialog.Destructive" parent="Adoptly.AlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/Adoptly.Dialog.Button.Destructive</item>
+    </style>
+
+    <style name="Adoptly.AlertDialog.Shape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="Adoptly.Dialog.Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="Adoptly.Dialog.Button.Destructive" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/urgency_red</item>
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="Adoptly.Dialog.Button.Text" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/text_muted</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
     <style name="Widget.Adoptly.Button.Primary" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/primary</item>
         <item name="cornerRadius">14dp</item>
         <item name="android:textColor">@color/on_primary</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:paddingTop">14dp</item>
         <item name="android:paddingBottom">14dp</item>
     </style>
@@ -65,8 +106,33 @@
         <item name="android:textColor">@color/primary_dark</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:paddingTop">14dp</item>
         <item name="android:paddingBottom">14dp</item>
         <item name="backgroundTint">@color/primary_container</item>
     </style>
+
+    <style name="Widget.Adoptly.Snackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="backgroundTint">@color/surface</item>
+        <item name="shapeAppearanceOverlay">@style/Widget.Adoptly.Snackbar.Shape</item>
+        <item name="android:elevation">8dp</item>
+        <item name="android:layout_margin">12dp</item>
+    </style>
+
+    <style name="Widget.Adoptly.Snackbar.Shape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">14dp</item>
+    </style>
+
+    <style name="Widget.Adoptly.Snackbar.TextView" parent="Widget.MaterialComponents.Snackbar.TextView">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Widget.Adoptly.Snackbar.Button" parent="Widget.MaterialComponents.Button.TextButton.Snackbar">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

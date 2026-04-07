@@ -9,7 +9,9 @@ import com.bumptech.glide.Glide
 import com.example.dogadoption.R
 import com.example.dogadoption.databinding.ItemBreedImageBinding
 
-class BreedImageAdapter : ListAdapter<String, BreedImageAdapter.ImageViewHolder>(ImageDiffCallback()) {
+class BreedImageAdapter(
+    private val onImageClicked: (String) -> Unit = {}
+) : ListAdapter<String, BreedImageAdapter.ImageViewHolder>(ImageDiffCallback()) {
 
     inner class ImageViewHolder(
         private val binding: ItemBreedImageBinding
@@ -21,7 +23,8 @@ class BreedImageAdapter : ListAdapter<String, BreedImageAdapter.ImageViewHolder>
                 .placeholder(R.drawable.ic_placeholder_dog)
                 .error(R.drawable.ic_placeholder_dog)
                 .centerCrop()
-            .into(binding.imageBreedGallery)
+                .into(binding.imageBreedGallery)
+            binding.root.setOnClickListener { onImageClicked(imageUrl) }
         }
     }
 

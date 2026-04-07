@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_urgency_red"
+                android:background="@drawable/bg_info_amber"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingHorizontal="16dp"
@@ -60,7 +60,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     android:text="@string/label_urgency_note"
-                    android:textColor="@color/urgency_red"
+                    android:textColor="@color/info_amber"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -210,17 +210,24 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_camera" />
+
                     <View
                         android:id="@+id/view_status_dot_photo"
                         android:layout_width="8dp"
                         android:layout_height="8dp"
+                        android:layout_marginStart="6dp"
                         android:background="@drawable/bg_count_badge" />
 
                     <TextView
                         android:id="@+id/text_photo_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="6dp"
                         android:text="@string/photo_not_attached"
                         android:textColor="@color/text_muted"
                         android:textSize="12sp" />
@@ -234,17 +241,24 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_map_pin" />
+
                     <View
                         android:id="@+id/view_status_dot_location"
                         android:layout_width="8dp"
                         android:layout_height="8dp"
+                        android:layout_marginStart="6dp"
                         android:background="@drawable/bg_count_badge" />
 
                     <TextView
                         android:id="@+id/text_location_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="6dp"
                         android:text="@string/location_not_attached"
                         android:textColor="@color/text_muted"
                         android:textSize="12sp" />
@@ -280,6 +294,7 @@
                     android:id="@+id/edit_text_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
                     android:inputType="textMultiLine"
                     android:minLines="4"
                     android:gravity="top" />
@@ -291,7 +306,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
-                android:visibility="gone" />
+                android:visibility="invisible" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_submit_report"

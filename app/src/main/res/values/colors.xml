@@ -20,6 +20,8 @@
     <color name="status_new_arrival_text">#16A34A</color>
     <color name="urgency_red">#991B1B</color>
     <color name="urgency_red_bg">#FEE2E2</color>
+    <color name="info_amber">#92400E</color>
+    <color name="info_amber_bg">#FEF3C7</color>
     <color name="icon_delete">#E24B4A</color>
     <color name="divider">#0D000000</color>
     <color name="black">#FF000000</color>

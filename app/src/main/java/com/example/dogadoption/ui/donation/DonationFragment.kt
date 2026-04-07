@@ -36,6 +36,7 @@ class DonationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupDropdown()
         setupAmountChips()
+        setupSubmitButtonState()
         observeViewModel()
 
         binding.buttonSubmitDonation.setOnClickListener {
@@ -47,9 +48,28 @@ class DonationFragment : Fragment() {
         }
     }
 
+    private fun setupSubmitButtonState() {
+        binding.buttonSubmitDonation.isEnabled = false
+        val watcher = object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) { updateSubmitButton() }
+        }
+        binding.editTextDonorName.addTextChangedListener(watcher)
+        binding.autoCompleteDonationType.addTextChangedListener(watcher)
+        binding.editTextQuantity.addTextChangedListener(watcher)
+    }
+
+    private fun updateSubmitButton() {
+        val name = binding.editTextDonorName.text?.toString()?.trim() ?: ""
+        val type = binding.autoCompleteDonationType.text?.toString()?.trim() ?: ""
+        val qty = binding.editTextQuantity.text?.toString()?.trim()?.toIntOrNull() ?: 0
+        binding.buttonSubmitDonation.isEnabled = name.isNotEmpty() && type.isNotEmpty() && qty > 0
+    }
+
     private fun setupDropdown() {
         val donationTypes = resources.getStringArray(R.array.donation_types)
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, donationTypes)
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, donationTypes)
         binding.autoCompleteDonationType.setAdapter(adapter)
     }
 
@@ -116,17 +136,16 @@ class DonationFragment : Fragment() {
             when (resource) {
                 is Resource.Loading -> {
                     binding.buttonSubmitDonation.isEnabled = false
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.INVISIBLE
                 }
                 is Resource.Success -> {
-                    binding.buttonSubmitDonation.isEnabled = true
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.INVISIBLE
                     clearFields()
                     Snackbar.make(binding.root, getString(R.string.donation_success), Snackbar.LENGTH_LONG).show()
                 }
                 is Resource.Error -> {
-                    binding.buttonSubmitDonation.isEnabled = true
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.INVISIBLE
+                    updateSubmitButton()
                     when (resource.message) {
                         "name" -> binding.inputLayoutDonorName.error = getString(R.string.error_name_empty)
                         "type" -> binding.inputLayoutDonationType.error = getString(R.string.error_type_empty)

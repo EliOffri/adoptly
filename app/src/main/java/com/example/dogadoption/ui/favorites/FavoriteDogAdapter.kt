@@ -10,10 +10,7 @@ import com.example.dogadoption.R
 import com.example.dogadoption.data.local.entity.FavoriteDogEntity
 import com.example.dogadoption.databinding.ItemFavoriteDogBinding
 
-class FavoriteDogAdapter(
-    private val onEditClicked: (FavoriteDogEntity) -> Unit,
-    private val onDeleteClicked: (FavoriteDogEntity) -> Unit
-) : ListAdapter<FavoriteDogEntity, FavoriteDogAdapter.FavoriteViewHolder>(FavoriteDiffCallback()) {
+class FavoriteDogAdapter : ListAdapter<FavoriteDogEntity, FavoriteDogAdapter.FavoriteViewHolder>(FavoriteDiffCallback()) {
 
     inner class FavoriteViewHolder(
         private val binding: ItemFavoriteDogBinding
@@ -31,8 +28,6 @@ class FavoriteDogAdapter(
                 .error(R.drawable.ic_placeholder_dog)
                 .centerCrop()
                 .into(binding.imageFavoriteBreed)
-            binding.buttonEditNotes.setOnClickListener { onEditClicked(entity) }
-            binding.buttonDeleteFavorite.setOnClickListener { onDeleteClicked(entity) }
         }
     }
 

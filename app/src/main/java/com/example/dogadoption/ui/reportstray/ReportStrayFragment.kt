@@ -82,6 +82,7 @@ class ReportStrayFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
 
+        setupSubmitButtonState()
         binding.buttonTakePhoto.setOnClickListener { onTakePhotoClicked() }
         binding.buttonGetLocation.setOnClickListener { onGetLocationClicked() }
         binding.buttonLocationSet.setOnClickListener { onGetLocationClicked() }
@@ -90,8 +91,26 @@ class ReportStrayFragment : Fragment() {
             viewModel.submitReport(description)
         }
         binding.buttonSaveDraft.setOnClickListener {
-            Snackbar.make(binding.root, getString(R.string.report_success), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, getString(R.string.draft_saved), Snackbar.LENGTH_SHORT).show()
         }
+    }
+
+    private fun setupSubmitButtonState() {
+        binding.buttonSubmitReport.isEnabled = false
+        binding.editTextDescription.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) { updateSubmitButton() }
+        })
+        viewModel.photoUri.observe(viewLifecycleOwner) { updateSubmitButton() }
+        viewModel.location.observe(viewLifecycleOwner) { updateSubmitButton() }
+    }
+
+    private fun updateSubmitButton() {
+        val description = binding.editTextDescription.text?.toString()?.trim() ?: ""
+        val hasPhoto = viewModel.photoUri.value != null
+        val hasLocation = viewModel.location.value != null
+        binding.buttonSubmitReport.isEnabled = description.isNotEmpty() && hasPhoto && hasLocation
     }
 
     private fun observeViewModel() {
@@ -129,17 +148,16 @@ class ReportStrayFragment : Fragment() {
             when (resource) {
                 is Resource.Loading -> {
                     binding.buttonSubmitReport.isEnabled = false
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.INVISIBLE
                 }
                 is Resource.Success -> {
-                    binding.buttonSubmitReport.isEnabled = true
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.INVISIBLE
                     Snackbar.make(binding.root, getString(R.string.report_success), Snackbar.LENGTH_LONG).show()
                     resetForm()
                 }
                 is Resource.Error -> {
-                    binding.buttonSubmitReport.isEnabled = true
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.INVISIBLE
+                    updateSubmitButton()
                     val message = when (resource.message) {
                         "description" -> getString(R.string.error_description_empty)
                         "photo" -> getString(R.string.error_photo_required)
@@ -247,6 +265,7 @@ class ReportStrayFragment : Fragment() {
     private fun resetForm() {
         binding.editTextDescription.text?.clear()
         viewModel.clearState()
+        updateSubmitButton()
     }
 
     override fun onDestroyView() {
