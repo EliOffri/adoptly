@@ -13,8 +13,12 @@ import javax.inject.Inject
 @HiltViewModel
 class PriceAlertViewModel @Inject constructor() : ViewModel() {
 
-    private val _submissionState = MutableLiveData<Resource<Unit>>()
-    val submissionState: LiveData<Resource<Unit>> = _submissionState
+    private val _submissionState = MutableLiveData<Resource<Unit>?>()
+    val submissionState: LiveData<Resource<Unit>?> = _submissionState
+
+    fun resetState() {
+        _submissionState.value = null
+    }
 
     fun submitAlert(symbol: String, condition: String, targetPrice: String) {
         if (symbol.isBlank()) {

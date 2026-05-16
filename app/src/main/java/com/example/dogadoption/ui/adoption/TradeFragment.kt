@@ -75,6 +75,7 @@ class TradeFragment : Fragment() {
 
     private fun observeViewModel(symbol: String) {
         viewModel.submissionState.observe(viewLifecycleOwner) { resource ->
+            resource ?: return@observe
             when (resource) {
                 is Resource.Loading -> {
                     binding.buttonSubmit.isEnabled = false
@@ -83,6 +84,7 @@ class TradeFragment : Fragment() {
                 is Resource.Success -> {
                     binding.buttonSubmit.isEnabled = true
                     binding.progressBar.visibility = View.GONE
+                    viewModel.resetState()
                     Snackbar.make(binding.root, getString(R.string.trade_success), Snackbar.LENGTH_LONG).show()
                     findNavController().popBackStack()
                 }
@@ -95,6 +97,7 @@ class TradeFragment : Fragment() {
                         "price" -> binding.inputLayoutPhone.error = getString(R.string.error_invalid_price)
                         else -> Snackbar.make(binding.root, getString(R.string.error_loading_data), Snackbar.LENGTH_LONG).show()
                     }
+                    viewModel.resetState()
                 }
             }
         }

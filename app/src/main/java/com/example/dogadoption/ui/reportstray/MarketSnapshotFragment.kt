@@ -141,6 +141,7 @@ class MarketSnapshotFragment : Fragment() {
         }
 
         viewModel.submissionState.observe(viewLifecycleOwner) { resource ->
+            resource ?: return@observe
             when (resource) {
                 is Resource.Loading -> {
                     binding.buttonSubmitReport.isEnabled = false
@@ -161,6 +162,7 @@ class MarketSnapshotFragment : Fragment() {
                         else -> getString(R.string.error_loading_data)
                     }
                     Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+                    viewModel.clearState()
                 }
             }
         }

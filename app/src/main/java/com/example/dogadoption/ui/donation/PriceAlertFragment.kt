@@ -131,6 +131,7 @@ class PriceAlertFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.submissionState.observe(viewLifecycleOwner) { resource ->
+            resource ?: return@observe
             when (resource) {
                 is Resource.Loading -> {
                     binding.buttonSubmitDonation.isEnabled = false
@@ -140,6 +141,7 @@ class PriceAlertFragment : Fragment() {
                     binding.progressBar.visibility = View.INVISIBLE
                     clearFields()
                     Snackbar.make(binding.root, getString(R.string.alert_success), Snackbar.LENGTH_LONG).show()
+                    viewModel.resetState()
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.INVISIBLE
@@ -150,6 +152,7 @@ class PriceAlertFragment : Fragment() {
                         "price" -> binding.inputLayoutQuantity.error = getString(R.string.error_invalid_price)
                         else -> Snackbar.make(binding.root, getString(R.string.error_loading_data), Snackbar.LENGTH_LONG).show()
                     }
+                    viewModel.resetState()
                 }
             }
         }

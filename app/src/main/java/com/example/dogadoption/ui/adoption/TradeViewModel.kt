@@ -16,8 +16,12 @@ class TradeViewModel @Inject constructor(
     private val watchlistRepository: WatchlistRepository
 ) : ViewModel() {
 
-    private val _submissionState = MutableLiveData<Resource<Unit>>()
-    val submissionState: LiveData<Resource<Unit>> = _submissionState
+    private val _submissionState = MutableLiveData<Resource<Unit>?>()
+    val submissionState: LiveData<Resource<Unit>?> = _submissionState
+
+    fun resetState() {
+        _submissionState.value = null
+    }
 
     fun submitTrade(symbol: String, shares: String, orderType: String, limitPrice: String) {
         val sharesInt = shares.toIntOrNull()

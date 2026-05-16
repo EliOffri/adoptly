@@ -20,8 +20,8 @@ class MarketSnapshotViewModel @Inject constructor() : ViewModel() {
     private val _location = MutableLiveData<Pair<Double, Double>?>()
     val location: LiveData<Pair<Double, Double>?> = _location
 
-    private val _submissionState = MutableLiveData<Resource<Unit>>()
-    val submissionState: LiveData<Resource<Unit>> = _submissionState
+    private val _submissionState = MutableLiveData<Resource<Unit>?>()
+    val submissionState: LiveData<Resource<Unit>?> = _submissionState
 
     fun setPhotoUri(uri: Uri) {
         _photoUri.value = uri
@@ -34,6 +34,7 @@ class MarketSnapshotViewModel @Inject constructor() : ViewModel() {
     fun clearState() {
         _photoUri.value = null
         _location.value = null
+        _submissionState.value = null
     }
 
     fun submitSnapshot(description: String) {
