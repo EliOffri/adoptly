@@ -1,6 +1,6 @@
 package com.example.dogadoption.di
 
-import com.example.dogadoption.data.remote.api.DogApiService
+import com.example.dogadoption.data.remote.api.StockApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +15,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    private const val BASE_URL = "https://finnhub.io/api/v1/"
 
     @Provides
     @Singleton
@@ -33,13 +35,13 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://dog.ceo/api/")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
     @Provides
     @Singleton
-    fun provideDogApiService(retrofit: Retrofit): DogApiService =
-        retrofit.create(DogApiService::class.java)
+    fun provideStockApiService(retrofit: Retrofit): StockApiService =
+        retrofit.create(StockApiService::class.java)
 }

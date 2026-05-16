@@ -2,8 +2,8 @@ package com.example.dogadoption.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.dogadoption.data.local.dao.FavoriteDogDao
-import com.example.dogadoption.data.local.dao.UserDogDao
+import com.example.dogadoption.data.local.dao.UserStockDao
+import com.example.dogadoption.data.local.dao.WatchlistDao
 import com.example.dogadoption.data.local.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -19,15 +19,15 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
-        Room.databaseBuilder(context, AppDatabase::class.java, "dog_adoption_db")
+        Room.databaseBuilder(context, AppDatabase::class.java, "stockly_db")
             .fallbackToDestructiveMigration()
             .build()
 
     @Provides
-    fun provideFavoriteDogDao(database: AppDatabase): FavoriteDogDao =
-        database.favoriteDogDao()
+    fun provideWatchlistDao(database: AppDatabase): WatchlistDao =
+        database.watchlistDao()
 
     @Provides
-    fun provideUserDogDao(database: AppDatabase): UserDogDao =
-        database.userDogDao()
+    fun provideUserStockDao(database: AppDatabase): UserStockDao =
+        database.userStockDao()
 }

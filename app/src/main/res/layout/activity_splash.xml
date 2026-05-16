@@ -22,7 +22,7 @@
             android:layout_height="44dp"
             android:layout_gravity="center"
             android:contentDescription="@null"
-            android:src="@drawable/ic_dog_paw" />
+            android:src="@drawable/ic_trending_up" />
 
     </FrameLayout>
 

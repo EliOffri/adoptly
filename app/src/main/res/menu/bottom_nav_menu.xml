@@ -9,16 +9,16 @@
     <item
         android:id="@+id/favoritesFragment"
         android:icon="@drawable/ic_favorite"
-        android:title="@string/title_favorites" />
+        android:title="@string/title_watchlist" />
 
     <item
         android:id="@+id/donationFragment"
-        android:icon="@drawable/ic_donate"
-        android:title="@string/title_donation" />
+        android:icon="@drawable/ic_alert_circle"
+        android:title="@string/title_price_alert" />
 
     <item
         android:id="@+id/reportStrayFragment"
-        android:icon="@drawable/ic_report"
-        android:title="@string/title_report_stray" />
+        android:icon="@drawable/ic_camera"
+        android:title="@string/title_market_snapshot" />
 
 </menu>

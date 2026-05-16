@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.dogadoption.ui.home.HomeFragment"
+        android:name="com.example.dogadoption.ui.home.MarketFragment"
         android:label="@string/title_home">
         <action
             android:id="@+id/action_homeFragment_to_breedDetailFragment"
@@ -15,13 +15,16 @@
 
     <fragment
         android:id="@+id/breedDetailFragment"
-        android:name="com.example.dogadoption.ui.breeddetail.BreedDetailFragment"
-        android:label="@string/title_breed_detail">
+        android:name="com.example.dogadoption.ui.breeddetail.StockDetailFragment"
+        android:label="@string/title_stock_detail">
         <argument
-            android:name="breedName"
+            android:name="symbol"
             app:argType="string" />
         <argument
-            android:name="imageUrl"
+            android:name="logoUrl"
+            app:argType="string" />
+        <argument
+            android:name="name"
             app:argType="string" />
         <action
             android:id="@+id/action_breedDetailFragment_to_adoptionFragment"
@@ -30,26 +33,26 @@
 
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.dogadoption.ui.favorites.FavoritesFragment"
-        android:label="@string/title_favorites" />
+        android:name="com.example.dogadoption.ui.favorites.WatchlistFragment"
+        android:label="@string/title_watchlist" />
 
     <fragment
         android:id="@+id/adoptionFragment"
-        android:name="com.example.dogadoption.ui.adoption.AdoptionFragment"
-        android:label="@string/title_adoption">
+        android:name="com.example.dogadoption.ui.adoption.TradeFragment"
+        android:label="@string/title_trade">
         <argument
-            android:name="breedName"
+            android:name="symbol"
             app:argType="string" />
     </fragment>
 
     <fragment
         android:id="@+id/donationFragment"
-        android:name="com.example.dogadoption.ui.donation.DonationFragment"
-        android:label="@string/title_donation" />
+        android:name="com.example.dogadoption.ui.donation.PriceAlertFragment"
+        android:label="@string/title_price_alert" />
 
     <fragment
         android:id="@+id/reportStrayFragment"
-        android:name="com.example.dogadoption.ui.reportstray.ReportStrayFragment"
-        android:label="@string/title_report_stray" />
+        android:name="com.example.dogadoption.ui.reportstray.MarketSnapshotFragment"
+        android:label="@string/title_market_snapshot" />
 
 </navigation>

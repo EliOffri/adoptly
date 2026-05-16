@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="donation_types">
-        <item>Food</item>
-        <item>Toys</item>
-        <item>Blankets</item>
+    <string-array name="alert_conditions">
+        <item>Above</item>
+        <item>Below</item>
+    </string-array>
+    <string-array name="order_types">
+        <item>Market</item>
+        <item>Limit</item>
+        <item>Stop</item>
     </string-array>
 </resources>
