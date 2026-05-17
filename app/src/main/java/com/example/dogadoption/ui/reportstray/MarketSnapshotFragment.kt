@@ -145,7 +145,7 @@ class MarketSnapshotFragment : Fragment() {
             when (resource) {
                 is Resource.Loading -> {
                     binding.buttonSubmitReport.isEnabled = false
-                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.INVISIBLE

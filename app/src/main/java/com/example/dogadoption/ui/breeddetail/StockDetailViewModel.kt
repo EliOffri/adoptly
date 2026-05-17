@@ -3,6 +3,8 @@ package com.example.dogadoption.ui.breeddetail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.example.dogadoption.data.local.entity.WatchlistEntity
 import com.example.dogadoption.data.remote.model.CompanyProfile
@@ -27,14 +29,20 @@ class StockDetailViewModel @Inject constructor(
     private val _newsState = MutableLiveData<Resource<List<NewsItem>>>()
     val newsState: LiveData<Resource<List<NewsItem>>> = _newsState
 
-    private val _isInWatchlist = MutableLiveData<Boolean>()
-    val isInWatchlist: LiveData<Boolean> = _isInWatchlist
+    private val _currentSymbol = MutableLiveData<String>()
+    val isInWatchlist: LiveData<Boolean> = _currentSymbol.switchMap { symbol ->
+        watchlistRepository.isInWatchlist(symbol).asLiveData()
+    }
 
     private var currentSymbol: String = ""
     private var currentLogoUrl: String = ""
     private var currentName: String = ""
+    private var isLoaded = false
 
     fun loadStockDetails(symbol: String, logoUrl: String, name: String) {
+        _currentSymbol.value = symbol
+        if (isLoaded) return
+        isLoaded = true
         currentSymbol = symbol
         currentLogoUrl = logoUrl
         currentName = name
@@ -44,11 +52,6 @@ class StockDetailViewModel @Inject constructor(
         }
         viewModelScope.launch {
             _newsState.value = stocksRepository.getStockNews(symbol)
-        }
-        viewModelScope.launch {
-            watchlistRepository.isInWatchlist(symbol).collect { inWatchlist ->
-                _isInWatchlist.postValue(inWatchlist)
-            }
         }
     }
 

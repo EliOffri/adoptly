@@ -135,7 +135,7 @@ class PriceAlertFragment : Fragment() {
             when (resource) {
                 is Resource.Loading -> {
                     binding.buttonSubmitDonation.isEnabled = false
-                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.INVISIBLE

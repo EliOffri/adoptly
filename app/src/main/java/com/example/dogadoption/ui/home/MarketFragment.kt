@@ -94,9 +94,13 @@ class MarketFragment : Fragment() {
     private fun applyFilters() {
         val filtered = fullList.filter { matchesQuery(it, currentQuery) }
         adapter.submitList(filtered)
-        if (pinnedFeaturedStock == null && filtered.isNotEmpty()) {
-            pinnedFeaturedStock = filtered.random()
-            updateFeaturedCard(pinnedFeaturedStock!!)
+        if (filtered.isNotEmpty()) {
+            val pinnedStillPresent = pinnedFeaturedStock != null &&
+                filtered.any { it.symbol == pinnedFeaturedStock!!.symbol }
+            if (!pinnedStillPresent) {
+                pinnedFeaturedStock = filtered.random()
+                updateFeaturedCard(pinnedFeaturedStock!!)
+            }
         }
     }
 
