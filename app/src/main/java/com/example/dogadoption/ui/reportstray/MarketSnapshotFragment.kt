@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.reportstray
+package com.example.stockly.ui.reportstray
 
 import android.Manifest
 import android.content.Intent
@@ -17,10 +17,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.example.dogadoption.R
-import com.example.dogadoption.databinding.FragmentMarketSnapshotBinding
-import com.example.dogadoption.util.PermissionUtils
-import com.example.dogadoption.util.Resource
+import com.example.stockly.R
+import com.example.stockly.databinding.FragmentMarketSnapshotBinding
+import com.example.stockly.util.PermissionUtils
+import com.example.stockly.util.Resource
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar

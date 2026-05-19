@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.breeddetail
+package com.example.stockly.ui.breeddetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.dogadoption.R
-import com.example.dogadoption.data.remote.model.NewsItem
-import com.example.dogadoption.databinding.ItemNewsBinding
+import com.example.stockly.R
+import com.example.stockly.data.remote.model.NewsItem
+import com.example.stockly.databinding.ItemNewsBinding
 
 class NewsAdapter(
     private val onNewsClicked: (NewsItem) -> Unit = {}
@@ -24,7 +24,7 @@ class NewsAdapter(
                 .placeholder(R.drawable.ic_placeholder_stock)
                 .error(R.drawable.ic_placeholder_stock)
                 .centerCrop()
-                .into(binding.imageBreedGallery)
+                .into(binding.imageNewsGallery)
             binding.textNewsHeadline.text = item.headline
             binding.root.setOnClickListener { onNewsClicked(item) }
         }

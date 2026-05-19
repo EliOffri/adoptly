@@ -1,9 +1,10 @@
-# Android Final Project — Dogs Adoption App
+# Android Final Project — Stockly (Stock Market Tracker)
 
 ## Project Overview
 
-Android native app for dog shelters. Fetches dog breed/info data from a public API using Retrofit,
-stores it in a local Room database, and reflects changes in the UI via LiveData/ViewModel.
+Android native app for tracking stock market data. Fetches stock quotes and company information
+from the Finnhub API using Retrofit, stores watchlist and user-added stocks in a local Room
+database, and reflects changes in the UI via LiveData/ViewModel.
 
 ## Architecture
 
@@ -21,25 +22,26 @@ stores it in a local Room database, and reflects changes in the UI via LiveData/
 - Local DB: Room with DAO + Entity + Database class
 - Async: Kotlin Coroutines + Flow/LiveData
 - DI: Dagger-Hilt
-- Advanced feature: Camera (take photo of stray animal + location)
+- Advanced feature: Camera (take a market snapshot + location)
 
 ## Fragments (minimum 6)
 
-1. HomeFragment — browsable list of adoptable dogs (Retrofit, RecyclerView)
-2. BreedDetailFragment — detail view for a selected dog/breed
-3. FavoritesFragment — locally saved favorites (Room, RecyclerView, add/edit/remove)
-4. AdoptionFragment — start adoption procedure for a selected dog
-5. DonationFragment — donate food/toys/blankets (form with input validation)
-6. ReportStrayFragment — report a stray animal: take photo + attach GPS location (Camera + Location)
+1. MarketFragment — browsable list of stocks (Retrofit, RecyclerView)
+2. StockDetailFragment — detail view for a selected stock
+3. WatchlistFragment — locally saved watchlist (Room, RecyclerView, add/edit/remove)
+4. TradeFragment — place a trade order for a selected stock
+5. PriceAlertFragment — set price alerts (form with input validation)
+6. MarketSnapshotFragment — capture a market moment: take photo + attach GPS location (Camera + Location)
 
 ## API
 
-Use the free Dog API: https://dog.ceo/dog-api/
+Use the Finnhub Stock API: https://finnhub.io/api/v1/
 
-- GET /breeds/list/all
-- GET /breed/{breed}/images
-- GET /breeds/image/random/{count}
-  These count as 3 structurally different endpoints (not just query param changes).
+- GET /search
+- GET /stock/profile2
+- GET /quote
+- GET /company-news
+  These count as 4 structurally different endpoints.
 
 ## Rules — STRICTLY FOLLOW
 
@@ -59,7 +61,7 @@ Use the free Dog API: https://dog.ceo/dog-api/
 
 - Naming: camelCase for variables/functions, PascalCase for classes, snake_case for XML IDs
 - No unused imports, no TODO comments left in final code
-- Repository pattern: one repo per data domain (DogsRepository, FavoritesRepository)
+- Repository pattern: one repo per data domain (StocksRepository, WatchlistRepository)
 - No comments at all
 
 ```

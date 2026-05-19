@@ -1,11 +1,11 @@
-package com.example.dogadoption.ui.adoption
+package com.example.stockly.ui.adoption
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dogadoption.data.repository.WatchlistRepository
-import com.example.dogadoption.util.Resource
+import com.example.stockly.data.repository.WatchlistRepository
+import com.example.stockly.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

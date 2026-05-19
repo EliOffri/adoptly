@@ -1,9 +1,9 @@
-package com.example.dogadoption.data.remote.api
+package com.example.stockly.data.remote.api
 
-import com.example.dogadoption.data.remote.model.CompanyProfile
-import com.example.dogadoption.data.remote.model.NewsItem
-import com.example.dogadoption.data.remote.model.Quote
-import com.example.dogadoption.data.remote.model.SearchResponse
+import com.example.stockly.data.remote.model.CompanyProfile
+import com.example.stockly.data.remote.model.NewsItem
+import com.example.stockly.data.remote.model.Quote
+import com.example.stockly.data.remote.model.SearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

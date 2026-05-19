@@ -1,4 +1,4 @@
-package com.example.dogadoption.util
+package com.example.stockly.util
 
 sealed class Resource<T>(
     val data: T? = null,

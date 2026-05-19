@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.home
+package com.example.stockly.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,13 +7,13 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
-import com.example.dogadoption.data.local.entity.UserStockEntity
-import com.example.dogadoption.data.local.entity.WatchlistEntity
-import com.example.dogadoption.data.remote.model.Stock
-import com.example.dogadoption.data.repository.StocksRepository
-import com.example.dogadoption.data.repository.UserStocksRepository
-import com.example.dogadoption.data.repository.WatchlistRepository
-import com.example.dogadoption.util.Resource
+import com.example.stockly.data.local.entity.UserStockEntity
+import com.example.stockly.data.local.entity.WatchlistEntity
+import com.example.stockly.data.remote.model.Stock
+import com.example.stockly.data.repository.StocksRepository
+import com.example.stockly.data.repository.UserStocksRepository
+import com.example.stockly.data.repository.WatchlistRepository
+import com.example.stockly.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

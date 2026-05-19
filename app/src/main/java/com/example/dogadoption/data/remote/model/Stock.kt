@@ -1,4 +1,4 @@
-package com.example.dogadoption.data.remote.model
+package com.example.stockly.data.remote.model
 
 data class Stock(
     val symbol: String,

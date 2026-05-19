@@ -23,10 +23,10 @@
     <string name="chip_small">Tech</string>
     <string name="chip_medium">Finance</string>
     <string name="chip_large">Energy</string>
-    <string name="chip_puppy">Growth</string>
-    <string name="chip_senior">Dividend</string>
+    <string name="chip_growth">Growth</string>
+    <string name="chip_dividend">Dividend</string>
     <string name="label_featured_today">Top mover today</string>
-    <string name="label_browse_breed">Market overview</string>
+    <string name="label_market_overview">Market overview</string>
     <string name="label_see_all">See all</string>
     <string name="featured_badge_label">Featured</string>
     <string name="avatar_initial">A</string>
@@ -52,10 +52,10 @@
     <string name="trade_this_stock">Trade</string>
     <string name="gallery_label">Recent News</string>
     <string name="label_about">Overview</string>
-    <string name="label_stat_sub_breeds">Price</string>
+    <string name="label_stat_price">Price</string>
     <string name="label_stat_status">Change</string>
     <string name="label_stat_none">—</string>
-    <string name="stat_adoptable">Active</string>
+    <string name="stat_active">Active</string>
     <string name="stock_detail_description">Industry: %1$s\nChange: %2$s\nWebsite: %3$s</string>
     <string name="price_format">$%.2f</string>
     <string name="change_format">%.2f%%</string>

@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/image_breed_gallery"
+            android:id="@+id/image_news_gallery"
             android:layout_width="0dp"
             android:layout_height="110dp"
             android:contentDescription="@string/gallery_label"
@@ -35,7 +35,7 @@
             android:maxLines="3"
             android:ellipsize="end"
             android:lineSpacingMultiplier="1.3"
-            app:layout_constraintTop_toBottomOf="@id/image_breed_gallery"
+            app:layout_constraintTop_toBottomOf="@id/image_news_gallery"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

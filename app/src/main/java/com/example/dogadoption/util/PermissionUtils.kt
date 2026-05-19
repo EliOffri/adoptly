@@ -1,4 +1,4 @@
-package com.example.dogadoption.util
+package com.example.stockly.util
 
 import android.Manifest
 import android.content.Context

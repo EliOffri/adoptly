@@ -7,17 +7,17 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/favoritesFragment"
+        android:id="@+id/watchlistFragment"
         android:icon="@drawable/ic_favorite"
         android:title="@string/title_watchlist" />
 
     <item
-        android:id="@+id/donationFragment"
+        android:id="@+id/alertFragment"
         android:icon="@drawable/ic_alert_circle"
         android:title="@string/title_price_alert" />
 
     <item
-        android:id="@+id/reportStrayFragment"
+        android:id="@+id/snapshotFragment"
         android:icon="@drawable/ic_camera"
         android:title="@string/title_market_snapshot" />
 

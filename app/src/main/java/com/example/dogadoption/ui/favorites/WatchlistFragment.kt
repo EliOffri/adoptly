@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.favorites
+package com.example.stockly.ui.favorites
 
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -16,9 +16,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogadoption.R
-import com.example.dogadoption.data.local.entity.WatchlistEntity
-import com.example.dogadoption.databinding.FragmentWatchlistBinding
+import com.example.stockly.R
+import com.example.stockly.data.local.entity.WatchlistEntity
+import com.example.stockly.databinding.FragmentWatchlistBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -46,7 +46,7 @@ class WatchlistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeViewModel()
-        binding.buttonBrowseDogs.setOnClickListener {
+        binding.buttonBrowseStocks.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
     }
@@ -172,7 +172,7 @@ class WatchlistFragment : Fragment() {
         inputLayout.addView(editText)
         inputLayout.setPadding(48, 8, 48, 0)
 
-        MaterialAlertDialogBuilder(requireContext(), R.style.Adoptly_AlertDialog)
+        MaterialAlertDialogBuilder(requireContext(), R.style.Stockly_AlertDialog)
             .setTitle(getString(R.string.edit_notes_title))
             .setView(inputLayout)
             .setPositiveButton(getString(R.string.confirm)) { _, _ ->
@@ -184,7 +184,7 @@ class WatchlistFragment : Fragment() {
     }
 
     private fun showDeleteDialog(entity: WatchlistEntity) {
-        MaterialAlertDialogBuilder(requireContext(), R.style.Adoptly_AlertDialog_Destructive)
+        MaterialAlertDialogBuilder(requireContext(), R.style.Stockly_AlertDialog_Destructive)
             .setTitle(getString(R.string.delete_favorite_title))
             .setMessage(getString(R.string.delete_favorite_message))
             .setPositiveButton(getString(R.string.delete)) { _, _ ->

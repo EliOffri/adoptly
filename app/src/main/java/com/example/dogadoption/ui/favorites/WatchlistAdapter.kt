@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.favorites
+package com.example.stockly.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.dogadoption.R
-import com.example.dogadoption.data.local.entity.WatchlistEntity
-import com.example.dogadoption.databinding.ItemWatchlistBinding
+import com.example.stockly.R
+import com.example.stockly.data.local.entity.WatchlistEntity
+import com.example.stockly.databinding.ItemWatchlistBinding
 
 class WatchlistAdapter : ListAdapter<WatchlistEntity, WatchlistAdapter.WatchlistViewHolder>(WatchlistDiffCallback()) {
 
@@ -17,7 +17,7 @@ class WatchlistAdapter : ListAdapter<WatchlistEntity, WatchlistAdapter.Watchlist
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(entity: WatchlistEntity) {
-            binding.textFavoriteBreedName.text = entity.name.ifBlank { entity.symbol }
+            binding.textFavoriteStockName.text = entity.name.ifBlank { entity.symbol }
             binding.textFavoriteNotes.text = entity.notes.ifBlank {
                 binding.root.context.getString(R.string.no_notes)
             }
@@ -27,7 +27,7 @@ class WatchlistAdapter : ListAdapter<WatchlistEntity, WatchlistAdapter.Watchlist
                 .placeholder(R.drawable.ic_placeholder_stock)
                 .error(R.drawable.ic_placeholder_stock)
                 .centerInside()
-                .into(binding.imageFavoriteBreed)
+                .into(binding.imageFavoriteStock)
         }
     }
 

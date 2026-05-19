@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.donation
+package com.example.stockly.ui.donation
 
 import android.os.Bundle
 import android.text.Editable
@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.dogadoption.R
-import com.example.dogadoption.databinding.FragmentPriceAlertBinding
-import com.example.dogadoption.util.Resource
+import com.example.stockly.R
+import com.example.stockly.databinding.FragmentPriceAlertBinding
+import com.example.stockly.util.Resource
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,9 +39,9 @@ class PriceAlertFragment : Fragment() {
         setupSubmitButtonState()
         observeViewModel()
 
-        binding.buttonSubmitDonation.setOnClickListener {
-            val symbol = binding.editTextDonorName.text?.toString()?.trim() ?: ""
-            val condition = binding.autoCompleteDonationType.text?.toString()?.trim() ?: ""
+        binding.buttonSubmitAlert.setOnClickListener {
+            val symbol = binding.editTextSymbol.text?.toString()?.trim() ?: ""
+            val condition = binding.autoCompleteCondition.text?.toString()?.trim() ?: ""
             val price = binding.editTextQuantity.text?.toString()?.trim() ?: ""
             clearErrors()
             viewModel.submitAlert(symbol, condition, price)
@@ -49,28 +49,28 @@ class PriceAlertFragment : Fragment() {
     }
 
     private fun setupSubmitButtonState() {
-        binding.buttonSubmitDonation.isEnabled = false
+        binding.buttonSubmitAlert.isEnabled = false
         val watcher = object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: android.text.Editable?) { updateSubmitButton() }
         }
-        binding.editTextDonorName.addTextChangedListener(watcher)
-        binding.autoCompleteDonationType.addTextChangedListener(watcher)
+        binding.editTextSymbol.addTextChangedListener(watcher)
+        binding.autoCompleteCondition.addTextChangedListener(watcher)
         binding.editTextQuantity.addTextChangedListener(watcher)
     }
 
     private fun updateSubmitButton() {
-        val symbol = binding.editTextDonorName.text?.toString()?.trim() ?: ""
-        val condition = binding.autoCompleteDonationType.text?.toString()?.trim() ?: ""
+        val symbol = binding.editTextSymbol.text?.toString()?.trim() ?: ""
+        val condition = binding.autoCompleteCondition.text?.toString()?.trim() ?: ""
         val price = binding.editTextQuantity.text?.toString()?.trim()?.toDoubleOrNull() ?: 0.0
-        binding.buttonSubmitDonation.isEnabled = symbol.isNotEmpty() && condition.isNotEmpty() && price > 0.0
+        binding.buttonSubmitAlert.isEnabled = symbol.isNotEmpty() && condition.isNotEmpty() && price > 0.0
     }
 
     private fun setupDropdown() {
         val alertConditions = resources.getStringArray(R.array.alert_conditions)
         val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, alertConditions)
-        binding.autoCompleteDonationType.setAdapter(adapter)
+        binding.autoCompleteCondition.setAdapter(adapter)
     }
 
     private fun setupThresholdChips() {
@@ -124,8 +124,8 @@ class PriceAlertFragment : Fragment() {
     }
 
     private fun clearErrors() {
-        binding.inputLayoutDonorName.error = null
-        binding.inputLayoutDonationType.error = null
+        binding.inputLayoutSymbol.error = null
+        binding.inputLayoutCondition.error = null
         binding.inputLayoutQuantity.error = null
     }
 
@@ -134,7 +134,7 @@ class PriceAlertFragment : Fragment() {
             resource ?: return@observe
             when (resource) {
                 is Resource.Loading -> {
-                    binding.buttonSubmitDonation.isEnabled = false
+                    binding.buttonSubmitAlert.isEnabled = false
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
@@ -147,8 +147,8 @@ class PriceAlertFragment : Fragment() {
                     binding.progressBar.visibility = View.INVISIBLE
                     updateSubmitButton()
                     when (resource.message) {
-                        "symbol" -> binding.inputLayoutDonorName.error = getString(R.string.error_symbol_required)
-                        "condition" -> binding.inputLayoutDonationType.error = getString(R.string.error_condition_required)
+                        "symbol" -> binding.inputLayoutSymbol.error = getString(R.string.error_symbol_required)
+                        "condition" -> binding.inputLayoutCondition.error = getString(R.string.error_condition_required)
                         "price" -> binding.inputLayoutQuantity.error = getString(R.string.error_invalid_price)
                         else -> Snackbar.make(binding.root, getString(R.string.error_loading_data), Snackbar.LENGTH_LONG).show()
                     }
@@ -159,8 +159,8 @@ class PriceAlertFragment : Fragment() {
     }
 
     private fun clearFields() {
-        binding.editTextDonorName.text?.clear()
-        binding.autoCompleteDonationType.text?.clear()
+        binding.editTextSymbol.text?.clear()
+        binding.autoCompleteCondition.text?.clear()
         binding.editTextQuantity.text?.clear()
         binding.editTextNote.text?.clear()
         selectChip(binding.chipAmount50)

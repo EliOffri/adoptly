@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.adoption
+package com.example.stockly.ui.adoption
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.dogadoption.R
-import com.example.dogadoption.databinding.FragmentTradeBinding
-import com.example.dogadoption.util.Resource
+import com.example.stockly.R
+import com.example.stockly.databinding.FragmentTradeBinding
+import com.example.stockly.util.Resource
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,7 +42,7 @@ class TradeFragment : Fragment() {
         }
 
         val symbol = arguments?.getString("symbol") ?: ""
-        binding.textBreedName.text = symbol
+        binding.textSymbolName.text = symbol
 
         setupOrderTypeDropdown()
         observeViewModel(symbol)

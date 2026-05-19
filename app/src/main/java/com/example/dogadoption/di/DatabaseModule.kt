@@ -1,10 +1,10 @@
-package com.example.dogadoption.di
+package com.example.stockly.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.dogadoption.data.local.dao.UserStockDao
-import com.example.dogadoption.data.local.dao.WatchlistDao
-import com.example.dogadoption.data.local.database.AppDatabase
+import com.example.stockly.data.local.dao.UserStockDao
+import com.example.stockly.data.local.dao.WatchlistDao
+import com.example.stockly.data.local.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

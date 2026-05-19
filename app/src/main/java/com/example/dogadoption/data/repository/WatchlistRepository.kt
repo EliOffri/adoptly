@@ -1,7 +1,7 @@
-package com.example.dogadoption.data.repository
+package com.example.stockly.data.repository
 
-import com.example.dogadoption.data.local.dao.WatchlistDao
-import com.example.dogadoption.data.local.entity.WatchlistEntity
+import com.example.stockly.data.local.dao.WatchlistDao
+import com.example.stockly.data.local.entity.WatchlistEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton

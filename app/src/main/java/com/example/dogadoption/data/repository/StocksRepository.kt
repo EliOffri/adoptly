@@ -1,12 +1,12 @@
-package com.example.dogadoption.data.repository
+package com.example.stockly.data.repository
 
-import com.example.dogadoption.data.remote.api.StockApiService
-import com.example.dogadoption.data.remote.model.CompanyProfile
-import com.example.dogadoption.data.remote.model.NewsItem
-import com.example.dogadoption.data.remote.model.Quote
-import com.example.dogadoption.data.remote.model.SearchResult
-import com.example.dogadoption.data.remote.model.Stock
-import com.example.dogadoption.util.Resource
+import com.example.stockly.data.remote.api.StockApiService
+import com.example.stockly.data.remote.model.CompanyProfile
+import com.example.stockly.data.remote.model.NewsItem
+import com.example.stockly.data.remote.model.Quote
+import com.example.stockly.data.remote.model.SearchResult
+import com.example.stockly.data.remote.model.Stock
+import com.example.stockly.util.Resource
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import java.io.IOException

@@ -1,4 +1,4 @@
-package com.example.dogadoption.data.remote.model
+package com.example.stockly.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 

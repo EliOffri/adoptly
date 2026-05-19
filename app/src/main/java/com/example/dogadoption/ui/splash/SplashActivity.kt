@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.splash
+package com.example.stockly.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.dogadoption.MainActivity
-import com.example.dogadoption.R
-import com.example.dogadoption.databinding.ActivitySplashBinding
+import com.example.stockly.MainActivity
+import com.example.stockly.R
+import com.example.stockly.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
 

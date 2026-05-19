@@ -310,7 +310,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_submit_report"
-                style="@style/Widget.Adoptly.Button.Primary"
+                style="@style/Widget.Stockly.Button.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -319,7 +319,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_save_draft"
-                style="@style/Widget.Adoptly.Button.Secondary"
+                style="@style/Widget.Stockly.Button.Secondary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

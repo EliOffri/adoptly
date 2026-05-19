@@ -1,6 +1,6 @@
-package com.example.dogadoption.di
+package com.example.stockly.di
 
-import com.example.dogadoption.data.remote.api.StockApiService
+import com.example.stockly.data.remote.api.StockApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

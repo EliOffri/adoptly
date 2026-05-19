@@ -23,7 +23,7 @@
             android:paddingBottom="32dp">
 
             <TextView
-                android:id="@+id/text_breed_label"
+                android:id="@+id/text_symbol_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_symbol"
@@ -32,7 +32,7 @@
                 android:letterSpacing="0.08" />
 
             <TextView
-                android:id="@+id/text_breed_name"
+                android:id="@+id/text_symbol_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -138,7 +138,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_submit"
-                style="@style/Widget.Adoptly.Button.Primary"
+                style="@style/Widget.Stockly.Button.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"

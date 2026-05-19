@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.dogadoption"
+    namespace = "com.example.stockly"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.dogadoption"
+        applicationId = "com.example.stockly"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

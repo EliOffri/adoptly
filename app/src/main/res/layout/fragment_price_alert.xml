@@ -48,7 +48,7 @@
                 android:letterSpacing="0.08" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_layout_donor_name"
+                android:id="@+id/input_layout_symbol"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                 app:boxBackgroundColor="@color/surface">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_text_donor_name"
+                    android:id="@+id/edit_text_symbol"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_primary"
@@ -80,7 +80,7 @@
                 android:letterSpacing="0.08" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_layout_donation_type"
+                android:id="@+id/input_layout_condition"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                 app:boxBackgroundColor="@color/surface">
 
                 <AutoCompleteTextView
-                    android:id="@+id/auto_complete_donation_type"
+                    android:id="@+id/auto_complete_condition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_primary"
@@ -241,8 +241,8 @@
                 android:visibility="invisible" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_submit_donation"
-                style="@style/Widget.Adoptly.Button.Primary"
+                android:id="@+id/button_submit_alert"
+                style="@style/Widget.Stockly.Button.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

@@ -1,11 +1,11 @@
-package com.example.dogadoption.data.local.database
+package com.example.stockly.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.dogadoption.data.local.dao.UserStockDao
-import com.example.dogadoption.data.local.dao.WatchlistDao
-import com.example.dogadoption.data.local.entity.UserStockEntity
-import com.example.dogadoption.data.local.entity.WatchlistEntity
+import com.example.stockly.data.local.dao.UserStockDao
+import com.example.stockly.data.local.dao.WatchlistDao
+import com.example.stockly.data.local.entity.UserStockEntity
+import com.example.stockly.data.local.entity.WatchlistEntity
 
 @Database(
     entities = [WatchlistEntity::class, UserStockEntity::class],

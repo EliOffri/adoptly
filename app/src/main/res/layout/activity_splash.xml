@@ -55,7 +55,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_get_started"
-        style="@style/Widget.Adoptly.Button.Primary"
+        style="@style/Widget.Stockly.Button.Primary"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"

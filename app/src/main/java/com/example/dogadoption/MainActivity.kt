@@ -1,4 +1,4 @@
-package com.example.dogadoption
+package com.example.stockly
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.dogadoption.databinding.ActivityMainBinding
+import com.example.stockly.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            val hideChrome = destination.id == R.id.breedDetailFragment ||
-                destination.id == R.id.adoptionFragment
+            val hideChrome = destination.id == R.id.stockDetailFragment ||
+                destination.id == R.id.tradeFragment
             binding.appHeader.visibility = if (hideChrome) View.GONE else View.VISIBLE
             binding.bottomNav.visibility = if (hideChrome) View.GONE else View.VISIBLE
         }

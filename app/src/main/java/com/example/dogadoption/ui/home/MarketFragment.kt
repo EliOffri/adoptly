@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.home
+package com.example.stockly.ui.home
 
 import android.os.Bundle
 import android.text.Editable
@@ -11,10 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
-import com.example.dogadoption.R
-import com.example.dogadoption.data.remote.model.Stock
-import com.example.dogadoption.databinding.FragmentMarketBinding
-import com.example.dogadoption.util.Resource
+import com.example.stockly.R
+import com.example.stockly.data.remote.model.Stock
+import com.example.stockly.databinding.FragmentMarketBinding
+import com.example.stockly.util.Resource
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +47,7 @@ class MarketFragment : Fragment() {
         setupRecyclerView()
         setupSearch()
         observeViewModel()
-        binding.fabAddDog.setOnClickListener { showAddStockBottomSheet() }
+        binding.fabAddStock.setOnClickListener { showAddStockBottomSheet() }
         binding.cardFeatured.setOnClickListener {
             currentFeaturedStock?.let { navigateToDetail(it) }
         }
@@ -76,8 +76,8 @@ class MarketFragment : Fragment() {
             onStockClicked = { stock -> navigateToDetail(stock) },
             onStockLongClicked = { stock -> showDeleteStockDialog(stock) }
         )
-        binding.recyclerViewBreeds.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.recyclerViewBreeds.adapter = adapter
+        binding.recyclerViewStocks.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerViewStocks.adapter = adapter
     }
 
     private fun setupSearch() {
@@ -115,17 +115,17 @@ class MarketFragment : Fragment() {
             when (resource) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
-                    binding.recyclerViewBreeds.visibility = View.GONE
+                    binding.recyclerViewStocks.visibility = View.GONE
                 }
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    binding.recyclerViewBreeds.visibility = View.VISIBLE
+                    binding.recyclerViewStocks.visibility = View.VISIBLE
                     fullList = resource.data ?: emptyList()
                     applyFilters()
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    binding.recyclerViewBreeds.visibility = View.VISIBLE
+                    binding.recyclerViewStocks.visibility = View.VISIBLE
                     Snackbar.make(binding.root, getString(R.string.error_loading_data), Snackbar.LENGTH_LONG)
                         .setAction(getString(R.string.retry)) { viewModel.loadStocks() }
                         .show()
@@ -174,7 +174,7 @@ class MarketFragment : Fragment() {
             putString("logoUrl", stock.logoUrl)
             putString("name", stock.name)
         }
-        findNavController().navigate(R.id.action_homeFragment_to_breedDetailFragment, bundle)
+        findNavController().navigate(R.id.action_homeFragment_to_stockDetailFragment, bundle)
     }
 
     override fun onDestroyView() {

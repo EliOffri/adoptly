@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.breeddetail
+package com.example.stockly.ui.breeddetail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.dogadoption.R
-import com.example.dogadoption.data.remote.model.NewsItem
-import com.example.dogadoption.databinding.FragmentStockDetailBinding
-import com.example.dogadoption.util.Resource
+import com.example.stockly.R
+import com.example.stockly.data.remote.model.NewsItem
+import com.example.stockly.databinding.FragmentStockDetailBinding
+import com.example.stockly.util.Resource
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,9 +60,9 @@ class StockDetailFragment : Fragment() {
         binding.btnCloseFullscreen.setOnClickListener { dismissFullscreen() }
         binding.fullscreenOverlay.setOnClickListener { dismissFullscreen() }
         binding.imageFullscreen.setOnClickListener {}
-        binding.buttonAdopt.setOnClickListener {
+        binding.buttonTrade.setOnClickListener {
             val bundle = Bundle().apply { putString("symbol", symbol) }
-            findNavController().navigate(R.id.action_breedDetailFragment_to_adoptionFragment, bundle)
+            findNavController().navigate(R.id.action_stockDetailFragment_to_tradeFragment, bundle)
         }
     }
 
@@ -87,9 +87,9 @@ class StockDetailFragment : Fragment() {
     }
 
     private fun setupInitialInfo(symbol: String, logoUrl: String, name: String) {
-        binding.textBreedTitle.text = name.ifBlank { symbol }
-        binding.textSubBreeds.text = symbol
-        binding.textStatSubbreedsValue.text = getString(R.string.label_stat_none)
+        binding.textStockTitle.text = name.ifBlank { symbol }
+        binding.textStockSymbol.text = symbol
+        binding.textStatPriceValue.text = getString(R.string.label_stat_none)
         Glide.with(this)
             .load(logoUrl.ifBlank { null })
             .placeholder(R.drawable.ic_placeholder_stock)
@@ -107,8 +107,8 @@ class StockDetailFragment : Fragment() {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     val (profile, quote) = resource.data!!
-                    binding.textBreedTitle.text = profile.name
-                    binding.textSubBreeds.text = if (profile.exchange.isNotBlank()) {
+                    binding.textStockTitle.text = profile.name
+                    binding.textStockSymbol.text = if (profile.exchange.isNotBlank()) {
                         "${arguments?.getString("symbol")} • ${profile.exchange}"
                     } else {
                         arguments?.getString("symbol") ?: ""
@@ -118,7 +118,7 @@ class StockDetailFragment : Fragment() {
                     } else {
                         getString(R.string.label_stat_none)
                     }
-                    binding.textStatSubbreedsValue.text = priceText
+                    binding.textStatPriceValue.text = priceText
                     val changeText = if (quote.changePercent != 0.0) {
                         getString(R.string.change_format, quote.changePercent)
                     } else {

@@ -243,10 +243,10 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/text_breeds_title"
+                    android:id="@+id/text_market_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_browse_breed"
+                    android:text="@string/label_market_overview"
                     android:textColor="@color/text_primary"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -254,7 +254,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_breeds"
+                android:id="@+id/recycler_view_stocks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
@@ -281,7 +281,7 @@
         app:layout_constraintTop_toBottomOf="@id/top_section" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_dog"
+        android:id="@+id/fab_add_stock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

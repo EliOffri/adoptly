@@ -1,4 +1,4 @@
-package com.example.dogadoption.ui.home
+package com.example.stockly.ui.home
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.dogadoption.R
-import com.example.dogadoption.data.remote.model.Stock
-import com.example.dogadoption.databinding.ItemStockBinding
+import com.example.stockly.R
+import com.example.stockly.data.remote.model.Stock
+import com.example.stockly.databinding.ItemStockBinding
 
 class StockAdapter(
     private val onStockClicked: (Stock) -> Unit,
@@ -21,8 +21,8 @@ class StockAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(stock: Stock) {
-            binding.textBreedName.text = stock.name.ifBlank { stock.symbol }
-            binding.textSubBreedCount.text = stock.symbol
+            binding.textStockName.text = stock.name.ifBlank { stock.symbol }
+            binding.textStockSymbol.text = stock.symbol
             binding.textCountBadge.visibility = View.GONE
             binding.textUserAddedBadge.visibility =
                 if (stock.isLocallyAdded) View.VISIBLE else View.GONE
@@ -31,7 +31,7 @@ class StockAdapter(
                 .placeholder(R.drawable.ic_placeholder_stock)
                 .error(R.drawable.ic_placeholder_stock)
                 .centerInside()
-                .into(binding.imageBreed)
+                .into(binding.imageStock)
             binding.root.setOnClickListener { onStockClicked(stock) }
             binding.root.setOnLongClickListener {
                 if (stock.isLocallyAdded) {
