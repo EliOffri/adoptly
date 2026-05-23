@@ -13,8 +13,5 @@ local.properties
 # OS-specific
 .DS_Store
 
-# Claude Code memory (internal tooling, not source code)
-memory/
-
 # Design reference (React prototype, not part of Android project)
 adoptly-react/
