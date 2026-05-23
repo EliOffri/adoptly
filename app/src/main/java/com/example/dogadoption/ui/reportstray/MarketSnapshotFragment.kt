@@ -106,7 +106,12 @@ class MarketSnapshotFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = SnapshotAdapter()
+        adapter = SnapshotAdapter { entity ->
+            SnapshotDetailBottomSheet.newInstance(
+                entity.photoUri, entity.description,
+                entity.latitude, entity.longitude, entity.createdAt
+            ).show(childFragmentManager, SnapshotDetailBottomSheet.TAG)
+        }
         binding.recyclerViewSnapshots.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewSnapshots.adapter = adapter
         attachSwipeHelper()

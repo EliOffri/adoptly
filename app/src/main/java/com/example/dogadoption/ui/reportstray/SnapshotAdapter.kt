@@ -14,7 +14,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class SnapshotAdapter : ListAdapter<SnapshotEntity, SnapshotAdapter.SnapshotViewHolder>(SnapshotDiffCallback()) {
+class SnapshotAdapter(
+    private val onItemClick: (SnapshotEntity) -> Unit
+) : ListAdapter<SnapshotEntity, SnapshotAdapter.SnapshotViewHolder>(SnapshotDiffCallback()) {
 
     private val dateFormat = SimpleDateFormat("MMM dd, yyyy · HH:mm", Locale.getDefault())
 
@@ -34,6 +36,7 @@ class SnapshotAdapter : ListAdapter<SnapshotEntity, SnapshotAdapter.SnapshotView
                 .error(R.drawable.ic_placeholder_stock)
                 .centerCrop()
                 .into(binding.imageSnapshotPhoto)
+            binding.root.setOnClickListener { onItemClick(entity) }
         }
     }
 
