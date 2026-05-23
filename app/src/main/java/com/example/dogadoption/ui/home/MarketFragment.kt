@@ -65,7 +65,7 @@ class MarketFragment : Fragment() {
                     binding.root,
                     getString(R.string.error_loading_data),
                     Snackbar.LENGTH_SHORT
-                ).show()
+                ).setAnchorView(requireActivity().findViewById(R.id.bottom_nav)).show()
                 else -> {}
             }
         }
@@ -128,6 +128,7 @@ class MarketFragment : Fragment() {
                     binding.recyclerViewStocks.visibility = View.VISIBLE
                     Snackbar.make(binding.root, getString(R.string.error_loading_data), Snackbar.LENGTH_LONG)
                         .setAction(getString(R.string.retry)) { viewModel.loadStocks() }
+                        .setAnchorView(requireActivity().findViewById(R.id.bottom_nav))
                         .show()
                 }
             }
@@ -137,6 +138,8 @@ class MarketFragment : Fragment() {
     private fun updateFeaturedCard(stock: Stock) {
         currentFeaturedStock = stock
         viewModel.setFeaturedStock(stock.symbol)
+        binding.layoutFeaturedHeader.visibility = View.VISIBLE
+        binding.cardFeatured.visibility = View.VISIBLE
         binding.textFeaturedName.text = stock.name.ifBlank { stock.symbol }
         binding.textFeaturedMeta.text = if (stock.industry.isNotBlank()) {
             stock.industry

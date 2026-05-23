@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
@@ -12,10 +13,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.stockly.R
-import com.example.stockly.data.remote.model.NewsItem
 import com.example.stockly.databinding.FragmentStockDetailBinding
 import com.example.stockly.util.Resource
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +29,7 @@ class StockDetailFragment : Fragment() {
 
     private val viewModel: StockDetailViewModel by viewModels()
     private lateinit var newsAdapter: NewsAdapter
+    private var prevWatchlistState: Boolean? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,10 +60,14 @@ class StockDetailFragment : Fragment() {
         viewModel.loadStockDetails(symbol, logoUrl, name)
 
         binding.btnBack.setOnClickListener { findNavController().navigateUp() }
-        binding.fabFavorite.setOnClickListener { viewModel.toggleWatchlist() }
-        binding.btnCloseFullscreen.setOnClickListener { dismissFullscreen() }
-        binding.fullscreenOverlay.setOnClickListener { dismissFullscreen() }
-        binding.imageFullscreen.setOnClickListener {}
+        binding.fabFavorite.setOnClickListener {
+            val isWatched = viewModel.isInWatchlist.value ?: false
+            if (isWatched) {
+                viewModel.removeFromWatchlist()
+            } else {
+                showAddToWatchlistDialog()
+            }
+        }
         binding.buttonTrade.setOnClickListener {
             val bundle = Bundle().apply { putString("symbol", symbol) }
             findNavController().navigate(R.id.action_stockDetailFragment_to_tradeFragment, bundle)
@@ -67,23 +75,10 @@ class StockDetailFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        newsAdapter = NewsAdapter { newsItem -> showFullscreenImage(newsItem) }
+        newsAdapter = NewsAdapter()
         binding.recyclerViewImages.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewImages.adapter = newsAdapter
-    }
-
-    private fun showFullscreenImage(newsItem: NewsItem) {
-        Glide.with(this)
-            .load(newsItem.image.ifBlank { null })
-            .placeholder(R.drawable.ic_placeholder_stock)
-            .error(R.drawable.ic_placeholder_stock)
-            .into(binding.imageFullscreen)
-        binding.fullscreenOverlay.visibility = View.VISIBLE
-    }
-
-    private fun dismissFullscreen() {
-        binding.fullscreenOverlay.visibility = View.GONE
     }
 
     private fun setupInitialInfo(symbol: String, logoUrl: String, name: String) {
@@ -119,15 +114,26 @@ class StockDetailFragment : Fragment() {
                         getString(R.string.label_stat_none)
                     }
                     binding.textStatPriceValue.text = priceText
-                    val changeText = if (quote.changePercent != 0.0) {
-                        getString(R.string.change_format, quote.changePercent)
+                    if (quote.changePercent != 0.0) {
+                        val changeText = if (quote.changePercent > 0.0) {
+                            "+${getString(R.string.change_format, quote.changePercent)}"
+                        } else {
+                            getString(R.string.change_format, quote.changePercent)
+                        }
+                        val changeColor = if (quote.changePercent > 0.0) {
+                            ContextCompat.getColor(requireContext(), R.color.change_positive)
+                        } else {
+                            ContextCompat.getColor(requireContext(), R.color.change_negative)
+                        }
+                        binding.textStatChangeValue.text = changeText
+                        binding.textStatChangeValue.setTextColor(changeColor)
                     } else {
-                        getString(R.string.label_stat_none)
+                        binding.textStatChangeValue.text = getString(R.string.label_stat_none)
+                        binding.textStatChangeValue.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary))
                     }
                     binding.textAboutDescription.text = getString(
                         R.string.stock_detail_description,
                         profile.finnhubIndustry.ifBlank { getString(R.string.label_stat_none) },
-                        changeText,
                         if (profile.weburl.isNotBlank()) profile.weburl else getString(R.string.label_stat_none)
                     )
                     Glide.with(this)
@@ -139,7 +145,9 @@ class StockDetailFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    Snackbar.make(binding.root, getString(R.string.error_loading_data), Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root, getString(R.string.error_loading_data), Snackbar.LENGTH_LONG)
+                        .setAnchorView(binding.buttonTrade)
+                        .show()
                 }
             }
         }
@@ -159,7 +167,39 @@ class StockDetailFragment : Fragment() {
                 getString(R.string.add_to_favorites)
             }
             binding.fabFavorite.contentDescription = desc
+            if (prevWatchlistState == false && isWatched) {
+                Snackbar.make(binding.root, getString(R.string.watchlist_added), Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.change_positive))
+                    .setAnchorView(binding.buttonTrade)
+                    .show()
+            }
+            prevWatchlistState = isWatched
         }
+    }
+
+    private fun showAddToWatchlistDialog() {
+        val inputLayout = TextInputLayout(
+            requireContext(), null,
+            com.google.android.material.R.attr.textInputOutlinedStyle
+        ).apply {
+            hint = getString(R.string.notes_hint)
+            setPadding(48, 8, 48, 0)
+        }
+        val editText = TextInputEditText(requireContext()).apply {
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary))
+            inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
+        }
+        inputLayout.addView(editText)
+
+        MaterialAlertDialogBuilder(requireContext(), R.style.Stockly_AlertDialog)
+            .setTitle(getString(R.string.add_to_favorites))
+            .setView(inputLayout)
+            .setPositiveButton(getString(R.string.confirm)) { _, _ ->
+                val notes = editText.text?.toString()?.trim() ?: ""
+                viewModel.addToWatchlist(notes)
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
     }
 
     override fun onDestroyView() {

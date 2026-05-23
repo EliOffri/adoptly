@@ -112,12 +112,14 @@
             android:paddingTop="18dp">
 
             <LinearLayout
+                android:id="@+id/layout_featured_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingHorizontal="20dp"
                 android:paddingBottom="12dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/text_featured_title"
@@ -135,6 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="188dp"
                 android:layout_marginBottom="22dp"
+                android:visibility="gone"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
                 app:cardBackgroundColor="@color/featured_card_bg"

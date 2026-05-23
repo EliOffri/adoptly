@@ -56,7 +56,8 @@
     <string name="label_stat_status">Change</string>
     <string name="label_stat_none">—</string>
     <string name="stat_active">Active</string>
-    <string name="stock_detail_description">Industry: %1$s\nChange: %2$s\nWebsite: %3$s</string>
+    <string name="stock_detail_description">Industry: %1$s\nWebsite: %2$s</string>
+    <string name="watchlist_added">Added to Watchlist</string>
     <string name="price_format">$%.2f</string>
     <string name="change_format">%.2f%%</string>
 
@@ -87,6 +88,7 @@
     <string name="error_order_type_required">Please select an order type</string>
     <string name="error_invalid_price">Enter a valid price greater than 0</string>
     <string name="error_symbol_required">Please enter a stock symbol</string>
+    <string name="error_symbol_not_in_app">Ticker not in app. Use one of the 10 available stocks.</string>
 
     <string name="label_set_price_alert">Set Price Alert</string>
     <string name="label_alert_subtitle">Get notified when a stock hits your target</string>
@@ -140,4 +142,27 @@
     <string name="open_settings">Open Settings</string>
 
     <string name="loading">Loading&#8230;</string>
+
+    <string name="condition_format">%1$s $%2$.2f</string>
+
+    <string name="label_active_alerts">Active Alerts</string>
+    <string name="label_no_alerts">No alerts set yet</string>
+    <string name="label_no_alerts_subtitle">Tap + to set your first price alert</string>
+    <string name="label_alerts_count">%d active alerts</string>
+    <string name="label_new_alert">New Alert</string>
+    <string name="label_edit_alert">Edit Alert</string>
+    <string name="delete_alert_title">Remove Alert</string>
+    <string name="delete_alert_message">Remove this price alert?</string>
+    <string name="alert_updated">Alert updated</string>
+
+    <string name="label_watchlist_snapshot">Watchlist Prices</string>
+    <string name="label_watchlist_empty_snapshot">Your watchlist is empty. Add stocks to include them here.</string>
+
+    <string name="label_market_snapshots">Market Snapshots</string>
+    <string name="label_no_snapshots">No snapshots yet</string>
+    <string name="label_no_snapshots_subtitle">Tap + to capture a market moment</string>
+    <string name="label_snapshots_count">%d snapshots saved</string>
+    <string name="label_new_snapshot">New Snapshot</string>
+    <string name="delete_snapshot_title">Delete Snapshot</string>
+    <string name="delete_snapshot_message">Delete this market snapshot?</string>
 </resources>

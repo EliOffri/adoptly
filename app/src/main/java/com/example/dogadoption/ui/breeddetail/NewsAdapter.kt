@@ -10,9 +10,7 @@ import com.example.stockly.R
 import com.example.stockly.data.remote.model.NewsItem
 import com.example.stockly.databinding.ItemNewsBinding
 
-class NewsAdapter(
-    private val onNewsClicked: (NewsItem) -> Unit = {}
-) : ListAdapter<NewsItem, NewsAdapter.NewsViewHolder>(NewsDiffCallback()) {
+class NewsAdapter : ListAdapter<NewsItem, NewsAdapter.NewsViewHolder>(NewsDiffCallback()) {
 
     inner class NewsViewHolder(
         private val binding: ItemNewsBinding
@@ -26,7 +24,6 @@ class NewsAdapter(
                 .centerCrop()
                 .into(binding.imageNewsGallery)
             binding.textNewsHeadline.text = item.headline
-            binding.root.setOnClickListener { onNewsClicked(item) }
         }
     }
 

@@ -55,19 +55,24 @@ class StockDetailViewModel @Inject constructor(
         }
     }
 
-    fun toggleWatchlist() {
+    fun addToWatchlist(notes: String) {
+        viewModelScope.launch {
+            watchlistRepository.addToWatchlist(
+                WatchlistEntity(
+                    symbol = currentSymbol,
+                    name = currentName,
+                    logoUrl = currentLogoUrl,
+                    notes = notes
+                )
+            )
+        }
+    }
+
+    fun removeFromWatchlist() {
         viewModelScope.launch {
             val existing = watchlistRepository.getWatchlistItem(currentSymbol)
             if (existing != null) {
                 watchlistRepository.removeFromWatchlist(existing)
-            } else {
-                watchlistRepository.addToWatchlist(
-                    WatchlistEntity(
-                        symbol = currentSymbol,
-                        name = currentName,
-                        logoUrl = currentLogoUrl
-                    )
-                )
             }
         }
     }

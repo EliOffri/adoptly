@@ -34,7 +34,11 @@
     <fragment
         android:id="@+id/watchlistFragment"
         android:name="com.example.stockly.ui.favorites.WatchlistFragment"
-        android:label="@string/title_watchlist" />
+        android:label="@string/title_watchlist">
+        <action
+            android:id="@+id/action_watchlistFragment_to_stockDetailFragment"
+            app:destination="@id/stockDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/tradeFragment"

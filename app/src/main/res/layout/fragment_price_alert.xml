@@ -1,18 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
+    <!-- LIST PANEL -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_alerts_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/label_active_alerts"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_alerts_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/text_muted"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_alerts_label" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_alerts"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="80dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_alerts_count" />
+
+        <LinearLayout
+            android:id="@+id/layout_empty_alerts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_alerts_count">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_no_alerts"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/label_no_alerts_subtitle"
+                android:textColor="@color/text_muted"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- ADD / EDIT FORM PANEL -->
     <androidx.core.widget.NestedScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/layout_add_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,18 +96,39 @@
             android:paddingTop="20dp"
             android:paddingBottom="32dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/label_set_price_alert"
-                android:textColor="@color/text_primary"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/button_back"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:clickable="true"
+                    android:contentDescription="@null"
+                    android:focusable="true"
+                    android:src="@drawable/ic_arrow_left" />
+
+                <TextView
+                    android:id="@+id/text_alert_form_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="@string/label_new_alert"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:layout_marginStart="44dp"
                 android:text="@string/label_alert_subtitle"
                 android:textColor="@color/text_muted"
                 android:textSize="13sp" />
@@ -42,10 +137,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:letterSpacing="0.08"
                 android:text="@string/label_stock_symbol"
                 android:textColor="@color/text_muted"
-                android:textSize="11sp"
-                android:letterSpacing="0.08" />
+                android:textSize="11sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_symbol"
@@ -54,30 +149,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:hint="@string/symbol_hint"
+                app:boxBackgroundColor="@color/surface"
                 app:boxCornerRadiusBottomEnd="14dp"
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="@color/border"
-                app:boxBackgroundColor="@color/surface">
+                app:boxStrokeColor="@color/border">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_symbol"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_primary"
+                    android:imeOptions="actionNext"
                     android:inputType="textPersonName"
-                    android:imeOptions="actionNext" />
+                    android:textColor="@color/text_primary" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:letterSpacing="0.08"
                 android:text="@string/label_alert_condition"
                 android:textColor="@color/text_muted"
-                android:textSize="11sp"
-                android:letterSpacing="0.08" />
+                android:textSize="11sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_condition"
@@ -86,30 +182,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:hint="@string/condition_hint"
+                app:boxBackgroundColor="@color/surface"
                 app:boxCornerRadiusBottomEnd="14dp"
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="@color/border"
-                app:boxBackgroundColor="@color/surface">
+                app:boxStrokeColor="@color/border">
 
                 <AutoCompleteTextView
                     android:id="@+id/auto_complete_condition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_primary"
+                    android:focusable="false"
                     android:inputType="none"
-                    android:focusable="false" />
+                    android:textColor="@color/text_primary" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:letterSpacing="0.08"
                 android:text="@string/label_quick_threshold"
                 android:textColor="@color/text_muted"
-                android:textSize="11sp"
-                android:letterSpacing="0.08" />
+                android:textSize="11sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -122,8 +219,8 @@
                     android:id="@+id/chip_amount_25"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_amount_chip_default"
                     android:clickable="true"
                     android:focusable="true"
@@ -137,9 +234,9 @@
                     android:id="@+id/chip_amount_50"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
-                    android:layout_weight="1"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_amount_chip_selected"
                     android:clickable="true"
                     android:focusable="true"
@@ -153,8 +250,8 @@
                     android:id="@+id/chip_amount_100"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
-                    android:layout_weight="1"
                     android:layout_marginStart="4dp"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_amount_chip_default"
                     android:clickable="true"
                     android:focusable="true"
@@ -170,10 +267,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:letterSpacing="0.08"
                 android:text="@string/label_custom_price"
                 android:textColor="@color/text_muted"
-                android:textSize="11sp"
-                android:letterSpacing="0.08" />
+                android:textSize="11sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_quantity"
@@ -182,30 +279,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:hint="@string/price_hint"
+                app:boxBackgroundColor="@color/surface"
                 app:boxCornerRadiusBottomEnd="14dp"
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="@color/border"
-                app:boxBackgroundColor="@color/surface">
+                app:boxStrokeColor="@color/border">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_quantity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_primary"
+                    android:imeOptions="actionNext"
                     android:inputType="number"
-                    android:imeOptions="actionNext" />
+                    android:textColor="@color/text_primary" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:letterSpacing="0.08"
                 android:text="@string/label_note_optional"
                 android:textColor="@color/text_muted"
-                android:textSize="11sp"
-                android:letterSpacing="0.08" />
+                android:textSize="11sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_note"
@@ -214,22 +312,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:hint="@string/note_placeholder"
+                app:boxBackgroundColor="@color/surface"
                 app:boxCornerRadiusBottomEnd="14dp"
                 app:boxCornerRadiusBottomStart="14dp"
                 app:boxCornerRadiusTopEnd="14dp"
                 app:boxCornerRadiusTopStart="14dp"
-                app:boxStrokeColor="@color/border"
-                app:boxBackgroundColor="@color/surface">
+                app:boxStrokeColor="@color/border">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_note"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/text_primary"
+                    android:gravity="top"
+                    android:imeOptions="actionDone"
                     android:inputType="textMultiLine"
                     android:minLines="3"
-                    android:gravity="top"
-                    android:imeOptions="actionDone" />
+                    android:textColor="@color/text_primary" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <ProgressBar
@@ -253,4 +352,16 @@
 
     </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/label_new_alert"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/primary"
+        app:tint="@color/on_primary" />
+
+</FrameLayout>

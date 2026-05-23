@@ -10,7 +10,9 @@ import com.example.stockly.R
 import com.example.stockly.data.local.entity.WatchlistEntity
 import com.example.stockly.databinding.ItemWatchlistBinding
 
-class WatchlistAdapter : ListAdapter<WatchlistEntity, WatchlistAdapter.WatchlistViewHolder>(WatchlistDiffCallback()) {
+class WatchlistAdapter(
+    private val onItemClicked: (WatchlistEntity) -> Unit
+) : ListAdapter<WatchlistEntity, WatchlistAdapter.WatchlistViewHolder>(WatchlistDiffCallback()) {
 
     inner class WatchlistViewHolder(
         private val binding: ItemWatchlistBinding
@@ -28,6 +30,7 @@ class WatchlistAdapter : ListAdapter<WatchlistEntity, WatchlistAdapter.Watchlist
                 .error(R.drawable.ic_placeholder_stock)
                 .centerInside()
                 .into(binding.imageFavoriteStock)
+            binding.root.setOnClickListener { onItemClicked(entity) }
         }
     }
 

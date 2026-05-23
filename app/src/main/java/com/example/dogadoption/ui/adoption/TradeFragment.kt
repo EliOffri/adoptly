@@ -85,7 +85,10 @@ class TradeFragment : Fragment() {
                     binding.buttonSubmit.isEnabled = true
                     binding.progressBar.visibility = View.GONE
                     viewModel.resetState()
-                    Snackbar.make(binding.root, getString(R.string.trade_success), Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root, getString(R.string.trade_success), Snackbar.LENGTH_LONG)
+                        .setBackgroundTint(androidx.core.content.ContextCompat.getColor(requireContext(), R.color.change_positive))
+                        .setAnchorView(binding.buttonSubmit)
+                        .show()
                     findNavController().popBackStack()
                 }
                 is Resource.Error -> {
@@ -95,7 +98,9 @@ class TradeFragment : Fragment() {
                         "shares" -> binding.inputLayoutName.error = getString(R.string.error_shares_required)
                         "orderType" -> binding.inputLayoutEmail.error = getString(R.string.error_order_type_required)
                         "price" -> binding.inputLayoutPhone.error = getString(R.string.error_invalid_price)
-                        else -> Snackbar.make(binding.root, getString(R.string.error_loading_data), Snackbar.LENGTH_LONG).show()
+                        else -> Snackbar.make(binding.root, getString(R.string.error_loading_data), Snackbar.LENGTH_LONG)
+                            .setAnchorView(binding.buttonSubmit)
+                            .show()
                     }
                     viewModel.resetState()
                 }

@@ -103,6 +103,17 @@ class StocksRepository @Inject constructor(
         }
     }
 
+    suspend fun getQuote(symbol: String): Resource<Quote> {
+        return try {
+            val quote = apiService.getQuote(symbol, API_KEY)
+            Resource.Success(quote)
+        } catch (e: IOException) {
+            Resource.Error(e.message ?: "Network error")
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "Unexpected error")
+        }
+    }
+
     suspend fun getStockNews(symbol: String): Resource<List<NewsItem>> {
         return try {
             val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())

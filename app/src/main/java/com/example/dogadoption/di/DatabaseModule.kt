@@ -2,6 +2,8 @@ package com.example.stockly.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.stockly.data.local.dao.PriceAlertDao
+import com.example.stockly.data.local.dao.SnapshotDao
 import com.example.stockly.data.local.dao.UserStockDao
 import com.example.stockly.data.local.dao.WatchlistDao
 import com.example.stockly.data.local.database.AppDatabase
@@ -30,4 +32,12 @@ object DatabaseModule {
     @Provides
     fun provideUserStockDao(database: AppDatabase): UserStockDao =
         database.userStockDao()
+
+    @Provides
+    fun providePriceAlertDao(database: AppDatabase): PriceAlertDao =
+        database.priceAlertDao()
+
+    @Provides
+    fun provideSnapshotDao(database: AppDatabase): SnapshotDao =
+        database.snapshotDao()
 }

@@ -52,7 +52,14 @@ class WatchlistFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = WatchlistAdapter()
+        adapter = WatchlistAdapter { entity ->
+            val bundle = Bundle().apply {
+                putString("symbol", entity.symbol)
+                putString("logoUrl", entity.logoUrl)
+                putString("name", entity.name)
+            }
+            findNavController().navigate(R.id.action_watchlistFragment_to_stockDetailFragment, bundle)
+        }
         binding.recyclerViewFavorites.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewFavorites.adapter = adapter
         attachSwipeHelper()
@@ -161,16 +168,19 @@ class WatchlistFragment : Fragment() {
     }
 
     private fun showEditNotesDialog(entity: WatchlistEntity) {
-        val inputLayout = TextInputLayout(requireContext())
+        val inputLayout = TextInputLayout(
+            requireContext(), null,
+            com.google.android.material.R.attr.textInputOutlinedStyle
+        ).apply {
+            hint = getString(R.string.notes_hint)
+            setPadding(48, 8, 48, 0)
+        }
         val editText = TextInputEditText(requireContext()).apply {
             setText(entity.notes)
-            setTextColor(resources.getColor(R.color.text_primary, null))
-            setHintTextColor(resources.getColor(R.color.text_muted, null))
-            hint = getString(R.string.notes_hint)
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary))
             inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
         }
         inputLayout.addView(editText)
-        inputLayout.setPadding(48, 8, 48, 0)
 
         MaterialAlertDialogBuilder(requireContext(), R.style.Stockly_AlertDialog)
             .setTitle(getString(R.string.edit_notes_title))

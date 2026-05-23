@@ -26,4 +26,6 @@
     <color name="divider">#0D000000</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="change_positive">#16A34A</color>
+    <color name="change_negative">#DC2626</color>
 </resources>
